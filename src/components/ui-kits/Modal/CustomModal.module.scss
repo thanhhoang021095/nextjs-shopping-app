@@ -1,0 +1,23 @@
+@use "../../../styles/layout.scss";
+
+.custom-modal {
+    max-width: 450px;
+    min-width: 300px;
+    border-radius: 20px;
+
+    &__title {
+        @include layout.flex-center;
+        width: 100%;
+    }
+}
+
+.product-modal-container {
+    text-align: center;
+}
+
+.product-modal-form {
+    &__label {
+        width: 100%;
+        text-align: center;
+    }
+}

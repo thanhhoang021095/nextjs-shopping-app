@@ -1,0 +1,26 @@
+@use '../../../styles/layout.scss';
+@use '../../../styles/responsive.scss';
+
+.menu-icon {
+  @include layout.flex-column;
+  @include responsive.desktop {
+    display: none;
+  }
+  @include responsive.tablet {
+    display: none;
+  }
+  @include responsive.multipleMedia(true, mobile) {
+    display: block;
+  }
+  @include responsive.mobile {
+    display: block;
+  }
+
+  &__elm {
+    width: 30px;
+    height: 2px;
+    background-color: #fff;
+    margin: 4px 0;
+    display: block;
+  }
+}

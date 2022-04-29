@@ -1,0 +1,41 @@
+@use "../../../styles/responsive.scss";
+@use "../../../styles/color.scss";
+@use "../../../styles/layout.scss";
+
+.navheader {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+    height: 60px;
+    background-color: color.$white-fff;
+    box-shadow: 0 3px 3px 0 rgb(0 0 0 / 10%);
+
+    .navheader-left {
+        @include layout.flex-align-center;
+
+        &__icon {
+            font-size: 25px;
+            font-weight: 700;
+            color: color.$black-000;
+        }
+        &__text {
+            color: color.$black-000;
+            margin-left: 15px;
+            font-size: 20px;
+            font-weight: 500;
+        }
+    }
+
+    .navheader-right {
+        display: flex;
+        justify-content: flex-end;  
+    }
+}
+
+.navheader-drawer {
+    z-index: 2;
+    padding: 0;
+}

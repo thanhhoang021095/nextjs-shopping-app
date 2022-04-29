@@ -1,0 +1,38 @@
+@use '../../../styles/layout.scss';
+@use '../../../styles/responsive.scss';
+
+.slider-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    @include layout.flex-align-center;
+    @include layout.flex-row;
+    overflow: hidden;
+
+    &__overlay {
+        @include layout.absolute-middle;
+        height: 100%;
+        overflow: hidden;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.9));
+        z-index: 1;
+    }
+
+    &__carousel {
+        @include layout.flex-align-center;
+        @include layout.flex-column;
+        
+        @include responsive.super-desktop {
+            height: 600px;
+        }
+        @include responsive.desktop {
+            height: 500px;
+        }
+        @include responsive.tablet {
+            height: 300px;
+        }
+    }
+
+    &__image {
+        height: 100%;
+    }
+}

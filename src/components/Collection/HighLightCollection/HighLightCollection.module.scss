@@ -1,0 +1,78 @@
+@use "../../../styles/color.scss";
+@use "../../../styles/layout.scss";
+@use "../../../styles/responsive.scss";
+
+.highlight-collection {
+    margin-top: 20px;
+    padding: 0 15px;
+
+    &__row {
+        &--col {
+            text-align: center;
+        }
+    }
+
+    .collection-card {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        @include responsive.multipleMedia(false, mobile, tablet) {
+            margin: 40px 0;
+        }
+     
+        &__image {
+            width: inherit;
+            height: inherit;
+        }
+        &__box {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            @include layout.flex-center;
+            flex-direction: column;
+            padding: 26px 15px 7px;
+            background: color.$white-fff;
+            width: 80%;
+            box-sizing: border-box;
+
+            &:hover {
+                color: color.$white-fff !important;
+                background: color.$primary-color;
+                cursor: pointer;
+            }
+    
+            &--title {
+                text-transform: capitalize;
+                color: color.$primary-color;
+                font-weight: 600 !important;
+                margin-bottom: 3px;
+                letter-spacing: 0;
+                @include responsive.multipleMedia(true, desktop, extra-large) {
+                    font-size: 18px;
+                }
+                @include responsive.multipleMedia(false, small) {
+                    font-size: 13px;
+                }
+                @include responsive.multipleMedia(false, tablet, mobile) {
+                    font-size: 18px;
+                }
+            }
+            &--type {
+                text-transform: uppercase;
+                margin-bottom: 10px;
+                @include responsive.multipleMedia(true, extra-large) {
+                    font-size: 36px;
+                }
+                @include responsive.multipleMedia(false, desktop) {
+                    font-size: 20px;
+                }
+                @include responsive.multipleMedia(false, small) {
+                    font-size: 14px;
+                }
+                @include responsive.multipleMedia(false, tablet, mobile) {
+                    font-size: 24px;
+                }
+            }
+        }
+    }
+}

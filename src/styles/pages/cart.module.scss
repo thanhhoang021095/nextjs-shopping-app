@@ -1,0 +1,159 @@
+@use "../layout.scss";
+@use "../color.scss";
+
+.title {
+  padding-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.table,
+.table-head,
+.table-data {
+  border: 1px solid black;
+  padding: 1rem;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-head,
+.table-data {
+  text-align: left;
+}
+
+.table-head {
+  background-color: #ffaf40;
+}
+
+.cart {
+  z-index: 99;
+  text-align: center;
+  width: 100%;
+  background-color: color.$white-fff;
+
+  .cart-container {
+    @include layout.layout-padding;
+    width: 100%;
+    padding-top: 20px;
+
+    .cart-title {
+      font-size: 50px;
+      font-weight: 300;
+      margin-bottom: 0;
+      text-align: center;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin-bottom: 20px;
+
+      &::after {
+        content: '';
+        height: 1px;
+        display: block;
+        background: #d5dbd9;
+        margin: 20px 0 40px;
+      }
+    }
+
+    .cart-content {
+      @include layout.flex-center;
+      width: 100%;
+
+      &__table {
+        width: 100%;
+      }
+    }
+
+    .cart-promotion {
+      margin-top: 20px;
+      text-align: left;
+
+      &__panel {
+        border: 1px solid #ddd;
+      }
+
+      &__heading {
+        padding: 20px;
+        background: #f5f5f5;
+        color: #000;
+        border-bottom: 0;
+
+        &--label {
+          margin-top: 0;
+          margin-bottom: 0;
+          font-size: 16px;
+        }
+      }
+
+      &__coupon {
+        padding: 15px;
+        border-top: 1px solid #ddd;
+
+        &--body {
+          @include layout.flex-row;
+          @include layout.flex-between;
+        }
+
+        &--title { 
+          margin: 0;
+        }
+      }
+    }
+
+    .cart-summary {
+      @include layout.flex-row;
+      margin-top: 40px;
+      
+      &__wrapper {
+        width: 100%;
+        justify-content: right;
+      }
+    }
+
+    .cart-action {
+      margin-top: 20px;
+      @include layout.flex-row;
+      @include layout.flex-between;
+    }
+  }
+}
+
+.itemLabel {
+  padding: 1rem;
+  background: #fff;
+  margin-bottom: 1.5rem;
+  @include layout.flex-between;
+  width: 100%;
+}
+
+.itemInfo {
+  margin-left: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.itemContent,
+.itemQuantity {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.itemPrice {
+  padding-right: 1rem;
+  border-right: 1px solid #d4d4d4;
+}
+
+.itemValue {
+  color: #ffaf40;
+}
+
+.itemQuantity {
+  margin-right: 1rem;
+  padding-left: 1rem;
+}

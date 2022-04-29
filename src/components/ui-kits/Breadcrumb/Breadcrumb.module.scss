@@ -1,0 +1,14 @@
+@use "../../../styles/layout.scss";
+@use "../../../styles/color.scss";
+
+.custom-breadcrumb {
+    @include layout.flex-align-center;
+    justify-content: flex-start;
+    border: 1px solid color.$grey-d5dbd9;
+    font-size: 14px;
+    position: relative;
+    margin: 15px 0 25px;
+    padding: 13px 15px;
+    border-radius: 3px;
+    line-height: 20px;
+}

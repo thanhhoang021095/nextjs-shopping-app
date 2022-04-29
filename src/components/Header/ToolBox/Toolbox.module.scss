@@ -1,0 +1,47 @@
+@use "../../../styles/layout.scss";
+@use "../../../styles/color.scss";
+@use "../../../styles/responsive.scss";
+
+.toolbox {
+    width: 100%;
+
+    .toolbox-col {
+        text-align: end;
+        @include responsive.super-desktop {
+            margin: 0 10px;
+        }
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &__search {
+            &:hover {
+                background-color: #000;
+            }
+            cursor: pointer;
+            border: none;
+            background: color.$primary-color;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+
+            &--icon {
+                font-weight: 700;
+                color: #fff;
+                font-size: 14px;
+            }
+        }
+
+        &__text {
+            white-space: nowrap;
+            margin-left: 5px;
+            margin-bottom: 0;
+            display: inline-block;
+        }
+    }
+}

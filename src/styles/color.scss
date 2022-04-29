@@ -1,0 +1,74 @@
+/**
+  @ main theme color
+*/
+
+// yellow
+$primary-color: #4d708e;
+
+//white
+$white-fff: #ffffff;
+$color_white_transparent: rgba($color: #ffffff,
+  $alpha: 0,
+);
+
+// gray
+$grey-efefef: #efefef;
+$grey-ededed: #ededed;
+$grey-f1f2f6:#f1f2f6;
+$grey-707070: #707070;
+$grey-f6f6f6: #f6f6f6;
+$grey-f7f7f7: #f7f7f7;
+$grey-383840: #383840;
+$grey-A8A8A8:#A8A8A8;
+$grey-d5dbd9:#d5dbd9;
+$grey-777777:#777777;
+$grey-e0e0e0:#e0e0e0;
+$grey-b2b2b2:#b2b2b2;
+
+// black
+$black-000: #000000;
+$black-383840:#383840;
+$black-0D0F23:#0D0F23;
+$black-222B45:#222B45;
+
+// green
+$green-89C53F : #89C53F;
+$green-94DA9D:#94DA9D;
+
+// grey
+$grey-C6C6C6:#C6C6C6;
+$grey-F7F7F7:#F7F7F7;
+$grey-F5F5F5:#F5F5F5;
+$grey-A8A8A8 :#A8A8A8;
+
+// red 
+$red-E17055: #e17055;
+
+// blue
+$blue-3a6182: #3a6182;
+/**
+  @ box shadow
+*/
+@mixin boxShadow-card {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+@mixin boxShadow-card-focus {
+    box-shadow: 0 0 0 4px #f9ca24, 0px 10px 50px rgb(255 175 64 / 60%) !important;
+}
+
+/**
+  @ background color
+*/
+@mixin greyBgColor {
+  background: $grey-efefef;
+}
+
+@mixin greenGradientBg($isText: false) {
+  background: linear-gradient(83.19deg, $green-50bc98 0%, $green-2e9b93 89.33%) !important;
+
+  @if $isText {
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+}

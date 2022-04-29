@@ -1,0 +1,45 @@
+@use "../../../styles/color.scss";
+@use "../../../styles/responsive.scss";
+
+.search-container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 120px;
+    min-width: 400px;
+    background-color: color.$white-fff;
+
+    &__input {
+        border: 1px solid color.$grey-d5dbd9;
+        border-radius: 0;
+        padding: 8px;
+        box-sizing: border-box;
+
+        &:focus {
+            outline: none;
+            box-shadow: 1px 10px rgb(82 168 236 / 80%)
+        }
+
+        &:focus, &:hover {
+            border-color: color.$grey-d5dbd9 !important;
+        }
+
+        &--icon {
+          color: color.$primary-color;
+          margin-right: 10px;
+          font-size: 20px;
+        }
+    }
+
+    &__button {
+        background: color.$primary-color;
+        color: color.$white-fff;
+        border: none;
+        margin-left: 20px;
+        border-radius: 0;
+
+        &:hover {
+          background-color: color.$black-000;
+        }
+    }
+}

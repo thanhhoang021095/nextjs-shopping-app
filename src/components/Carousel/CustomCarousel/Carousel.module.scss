@@ -1,0 +1,10 @@
+@use "../../../styles/layout.scss";
+@use "../../../styles/responsive.scss";
+@use "../../../styles/color.scss";
+
+.carousel {
+  margin: auto;
+  margin-bottom: 150px;
+  width: 100%;
+  z-index: 1;
+}

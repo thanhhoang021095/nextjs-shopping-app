@@ -1,0 +1,11 @@
+@use "../../../styles/color.scss" as color;
+
+.link-text {
+    color: color.$black-000;
+    text-transform: capitalize;
+    font-weight: bold;
+    
+    &:hover  {
+        color: color.$primary-color;
+    }
+}

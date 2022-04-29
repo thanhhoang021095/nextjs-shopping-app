@@ -1,0 +1,91 @@
+@use "../../../styles/layout.scss";
+@use "../../../styles/color.scss";
+@use "../../../styles/responsive.scss";
+
+.menu-dropdown {
+    // margin-right: 20px;
+
+    &__link {
+        @include layout.flex-align-center;
+        cursor: pointer;
+
+        &--text {
+            text-transform: capitalize;
+            color: color.$black-000;
+            font-weight: 600;
+            font-size: 13px;
+            padding: 0;
+            margin: 0;
+            white-space: nowrap;
+            @include responsive.desktop {
+                font-size: 14px;
+            }
+            @include responsive.super-desktop {
+                font-size: 16px;
+            }
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    &__icon {
+        padding-left: 5px;
+        font-size: 16px;
+    }
+}
+
+.menu {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 20px;
+    width: calc(100vw - 180px);
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba($color: color.$white-fff, $alpha: 0.9);
+    box-shadow: 0 3px 21px rgb(0 0 0 / 10%);
+
+    .menu-row {
+        display: flex;
+        justify-content: space-evenly;
+
+        .menu-col {
+            padding: 0 20px;
+
+            &__title {
+                color: color.$black-000;
+                white-space: nowrap;
+                font-weight: 600;
+                font-size: 16px;
+                cursor: pointer;
+
+                &:hover {
+                    color: color.$primary-color;
+                }
+            }
+
+            &__list {
+                display: flex;
+                flex-direction: column;
+                margin-top: 20px;
+
+                &--link {
+                    text-decoration: none;
+                    color: color.$black-000;
+                    font-weight: normal;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: color.$primary-color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.hover-link {
+    color: color.$primary-color !important;
+}

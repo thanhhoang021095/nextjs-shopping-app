@@ -1,0 +1,111 @@
+@use "../layout.scss";
+@use "../responsive.scss";
+@use "../color.scss";
+
+.category {
+    z-index: 99;
+    text-align: center;
+    width: 100%;
+    background-color: color.$white-fff;
+
+    .category-content {
+        @include layout.layout-padding;
+        width: 100%;
+        padding-top: 20px;
+
+        &__breadcrumb {
+            @include layout.flex-align-center;
+            justify-content: flex-start;
+            border: 1px solid color.$grey-d5dbd9;
+            font-size: 14px;
+            position: relative;
+            margin: 15px 0 25px;
+            padding: 13px 15px;
+            border-radius: 3px;
+            line-height: 20px;
+
+            &--item {
+                text-transform: capitalize;
+            }
+        }
+
+        &__description {
+            text-align: left;
+            color: color.$grey-777777;
+
+            &--title {
+                text-transform: capitalize;
+                color: color.$black-000;
+            }
+
+            &--desc {
+                @include layout.flex-row;
+            }
+        }
+
+        &__divider {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        &__filter {
+            width: 100%;
+            height: 52px;
+            background: color.$grey-f6f6f6;
+            margin: 17px 0 30px;
+            border: 1px solid color.$grey-e0e0e0;
+        }
+
+        &__filter-item  {
+            @include layout.flex-center;
+            width: 100%;
+            height: 100%;
+            border-right: 1px solid #d5dbd9;
+            cursor: pointer;
+
+            &:last-child {
+                border-right: none;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            &:nth-child(4) {
+                justify-content: right;
+                padding-right: 10px;
+                cursor: auto;
+            }
+
+            &--icon {
+                @include layout.flex-center;
+                width: 100%;
+                height: 100%;
+                font-size: 18px;
+                color: #333;
+
+                &:hover {
+                    color: color.$primary-color;
+                }
+            }
+        }
+
+        &__define {
+            text-align: left;
+        }
+
+        &__thumb {
+            text-align: center;
+            cursor: pointer;
+
+            &--image {
+                overflow: hidden;
+                border: 1px solid #e0e0e0;
+            }
+
+            &--name {
+                margin-top: 5px;
+            }
+        }
+    }
+}

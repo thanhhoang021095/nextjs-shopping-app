@@ -1,0 +1,38 @@
+@use "../../../styles/layout.scss";
+@use "../../../styles/color.scss";
+
+.single-carousel-container {
+    padding: 0;
+    &__root {
+        position: relative;
+    }
+}
+
+.handler-button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    cursor: pointer;
+    @include layout.flex-center;
+    z-index: 2;
+    color: color.$black-000;
+    background: rgba(255,255,255,.4);
+    text-align: center;
+    width: 20px;
+    height: 56px;
+    font-size: 10px;
+
+    &:hover {
+        background-color: color.$primary-color;
+        color: color.$white-fff;
+    }
+}
+
+.prev-button {
+    left: 0;
+}
+
+.next-button {
+    right: 0;
+}

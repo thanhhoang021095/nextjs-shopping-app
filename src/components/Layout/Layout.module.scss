@@ -1,0 +1,27 @@
+@use '../../styles/layout.scss';
+@use '../../styles/responsive.scss';
+@use '../../styles/color.scss';
+
+.layout-container {
+    padding-top: 90px;
+    min-height: 100vh;
+    height: 100%;
+    z-index: 1;
+    // @include responsive.multipleMedia(false, tablet) {
+    // }
+}
+
+.header-tape {
+    background-color: color.$primary-color;
+    height: 65rem;
+    @include responsive.multipleMedia(false, extra-large) {
+        height: 55rem;
+    }
+    @include responsive.multipleMedia(false, desktop) {
+        height: 50rem;
+    }
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 22vw;
+}

@@ -1,0 +1,36 @@
+@use "../../styles/layout.scss";
+@use "../../styles/color.scss";
+
+.feature-product {
+    margin-top: 80px;
+    &__title {
+        margin-bottom: 44px;
+        text-align: center;
+        font-weight: 650;
+        font-size: 24px;
+    }
+
+    .feature-product-container {
+        padding-bottom: 16px;
+
+        &__item,
+        &__sub-item {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-bottom: 30px;
+        }
+        
+        &__item {
+            text-align: start;
+        }
+        &__sub-item {
+            text-align: start;
+
+            &--col {
+                @include layout.flex-column;
+                justify-content: space-between;
+                height: 100%;
+            }
+        }
+    }
+}

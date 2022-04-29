@@ -1,0 +1,5 @@
+{
+    "env_name": "production",
+    "api_url": "https://server.hoang-shop-web.xyz/api/",
+    "port": 6001
+}

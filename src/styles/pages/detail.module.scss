@@ -1,0 +1,151 @@
+@use "../layout.scss";
+@use "../responsive.scss";
+@use "../color.scss";
+
+.detail {
+    z-index: 99;
+    text-align: center;
+    width: 100%;
+    background-color: color.$white-fff;
+
+    .detail-container {
+        @include layout.layout-padding;
+        width: 100%;
+        padding-top: 20px;
+
+        &__media {
+            height: 100%;
+            overflow: hidden;
+
+            .detail-content {
+                &__images {
+                    &--item {
+                        cursor: pointer;
+                        width: 100%;
+                        height: auto;
+                        border: 0.5px solid color.$grey-d5dbd9;
+
+                        @include responsive.multipleMedia(false, desktop) {
+                            width: 114px;
+                            height: 114px;
+                        }
+
+                        margin: 10px 0;
+                        &:first-child {
+                            margin-top: 0;
+                        }
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+                        &:hover {
+                            border: 0.5px solid color.$primary-color;
+                        }
+                    }
+                }
+
+                &__cover {
+                    position: relative;
+
+                    &--main {
+                        border: 0.5px solid #eee;
+                        height: 100%;
+                    }
+
+                    &--glass {
+                        @include layout.flex-center;
+                        height: 100%;
+                    }
+                }
+
+                &__carousel {
+                    width: 100%;
+                }
+            }
+        }
+
+        &__tabs {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            border-top: 2px solid color.$primary-color;
+            @include layout.flex-row;
+        }
+
+        &__row {
+            width: 100%;
+        }
+
+        &__nav-tab {
+            @include layout.flex-column;
+
+            &--item {
+                text-align: start;
+                list-style-type: none;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 16px;
+                border: 1px solid color.$grey-d5dbd9;
+                border-radius: 3px;
+                border-top: none;
+                padding: 10px 15px;
+                width: 100%;
+                box-sizing: border-box;
+                cursor: pointer;
+                background-color: color.$grey-F5F5F5;
+
+                &:hover {
+                    background-color: color.$grey-ededed;
+                    color: color.$blue-3a6182;
+                }
+            }
+
+            &--active {
+                background-color: transparent;
+                color: color.$blue-3a6182;
+            }
+        }
+
+        &__tab-content {
+            padding: 40px 40px 10px;
+            text-align: start;
+            width: 100%;
+        }
+
+        &__related-products {
+            &--title {
+                text-align: start;
+                margin-bottom: 33px;
+            }
+        }
+    }
+}
+
+.active-image {
+    border: 0.5px solid color.$primary-color !important;
+}
+
+.detail-info {
+    @include layout.flex-column;
+}
+
+.carousel-list {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.multi-carousel-item {
+    height: 100%;
+    @include responsive.multipleMedia(true, desktop) {
+        padding: 0 20px;
+        width: 385.5px;
+    }
+    @include responsive.small {
+        width: 262.5px;
+    }
+    @include responsive.tablet {
+        width: 213.333px;
+    }
+    @include responsive.mobile {
+        width: 100%;
+    }
+}

@@ -1,0 +1,72 @@
+@use "../../styles/layout.scss";
+
+.content {
+    @include layout.flex-column;
+    text-align: start;
+
+    &__name {
+        margin: 0 0 20px;
+        color: #000;
+    }
+    &__short-info {
+        font-size: 14px;
+    }
+
+    &__price {
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    &__divider {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 0;
+        border-top: 1px solid #eee;
+    }
+
+    &__options {
+        text-transform: uppercase;
+        font-weight: 300;
+    }
+
+    &__select {
+        margin-bottom: 15px;
+
+        &--selector {
+            height: 40px;
+           display: flex;
+            align-items: center;
+        }
+    }
+
+    &__qty {
+        margin-top: 20px;
+        @include layout.flex-row;
+    }
+    &__rate {
+        margin: 20px 0;
+    }
+    &__review {
+        font-weight: 700;
+        font-size: 14px;
+    }
+}
+.product-info-form {
+    &__item {
+        margin-bottom: 15px;
+        &--select {
+            height: 40px;
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__submit {
+        margin-top: 20px;
+        @include layout.flex-row;
+
+        &--input-number {
+            @include layout.flex-align-center;
+        }
+    }
+}

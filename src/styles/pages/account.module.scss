@@ -1,0 +1,46 @@
+@use "../layout.scss";
+@use "../color.scss";
+
+.account-paper {
+    @include layout.flex-center;
+    @include layout.flex-column;
+    width: 100%;
+}
+
+.account-container {
+    @include layout.flex-column;
+    align-items: flex-start;
+    width: fit-content;
+
+    &__title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        width: 100%;
+        text-align: center;
+        font-weight: 600;
+        color: color.$primary-color;
+    }
+
+    &__pass {
+        @include layout.flex-center;
+    }
+
+    &__updatePass {
+        @include layout.flex-column;
+        border: 1px solid #ffaf40;
+        padding: 1rem;
+
+        &--btn {
+            @include layout.flex-evenly;
+        }
+    }
+
+    &__btn {
+        @include layout.flex-evenly;
+        padding: 2rem;
+        width: 50%;
+        margin: 0 auto;
+        height: fit-content;
+    }
+}
+

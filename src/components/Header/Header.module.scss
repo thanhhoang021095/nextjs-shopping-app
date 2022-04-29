@@ -1,0 +1,83 @@
+@use "../../styles/layout.scss";
+@use "../../styles/color.scss";
+@use "../../styles/responsive.scss";
+
+.header {
+    @include responsive.multipleMedia(false, mobile) {
+        display: none;
+    }
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    height: 60px;
+    background-color: transparent;
+
+    .header-container {
+        padding: 0 15px;
+        height: 100%;
+        z-index: 2;
+
+        &__item {
+            @include layout.flex-align-center;
+
+            &:nth-child(2) {
+                justify-content: end;
+            }
+
+            &:last-child {
+                justify-content: flex-end;
+            }
+
+            &:first-child {
+                justify-content: center;
+                height: 100%;
+            }
+
+            &--logo {
+                margin-top: 20px;
+                cursor: pointer;
+                // height: 100%;
+                // width: 40px;
+            }
+
+            .header-category {
+                width: 80%;
+                text-align: center;
+
+                &__item {
+                    padding: 0;
+                    cursor: pointer;
+
+                    @include responsive.desktop {
+                        font-size: 14px;
+                    }
+                    @include responsive.super-desktop {
+                        font-size: 16px;
+                    }
+                    
+                    &--text {
+                        color: #000;
+                        font-weight: 600;
+                        white-space: nowrap;
+                        font-size: 13px;
+                        margin: 0;
+
+                        @include responsive.desktop {
+                            font-size: 14px;
+                        }
+                        @include responsive.super-desktop {
+                            font-size: 16px;
+                        }
+
+                        &:hover {
+                            color: color.$primary-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

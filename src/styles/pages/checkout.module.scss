@@ -1,0 +1,42 @@
+@use "../color.scss";
+@use "../layout.scss";
+
+.checkout {
+    z-index: 99;
+    text-align: center;
+    width: 100%;
+    background-color: color.$white-fff;
+
+    .checkout-container {
+        @include layout.layout-padding;
+        width: 100%;
+        padding-top: 20px;
+
+        .checkout-title {
+            font-size: 50px;
+            font-weight: 300;
+            margin-bottom: 0;
+            text-align: center;
+            -ms-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            margin-bottom: 20px;
+
+            &::after {
+                content: "";
+                height: 1px;
+                display: block;
+                background: #d5dbd9;
+                margin: 20px 0 40px;
+            }
+        }
+    }
+
+    .checkout-panel {
+        text-align: left;
+
+        &__header {
+            margin-bottom: 0;
+        }
+    }
+}

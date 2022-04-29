@@ -1,0 +1,104 @@
+
+@use "../../../../styles/color.scss";
+
+.cart-dropdown {
+    padding: 0;
+    position: relative;
+
+    &__button {
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+
+        &:first-child {
+            position: relative;
+            margin-right: 15px;
+        }
+        &--total {
+            position: absolute;
+            top: -6px;
+            right: -12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: color.$primary-color;
+            color: color.$white-fff;
+
+            p {
+                color: color.$white-fff;
+                font-size: 12px;
+                margin: 0;
+            }
+        }
+    }
+}
+
+.account-dropdown {
+    &__button {
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+    }
+}
+.cart-menu, .account-menu {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    position: absolute;
+    top: 45px;
+    background-color: color.$white-fff;
+    box-shadow: 0 3px 21px rgba(0,0,0,.1);
+
+    &__item {
+        list-style-type: none;
+        box-sizing: border-box;
+    }
+}
+
+.cart-menu {
+    right: 24px;
+
+    &__item {
+        padding: 5px 40px;
+        min-width: 160px;
+        text-align: center;
+    }
+}
+
+.account-menu {
+    right: 0;
+
+    &__item {
+        padding: 2px 32px;
+
+        &:hover {
+            background-color: color.$primary-color;
+            color: color.$white-fff;
+        }
+    }
+}
+
+.navcart-popup {
+    position: absolute;
+    z-index: 999999999999;
+    min-width: 260px;
+    width: 320px;
+    padding: 20px;
+    max-height: 434px;
+    line-height: 1.4em;
+    right: 0;
+    top: 40px;
+    list-style-type: none;
+    color: #777;
+    margin: 10px 0 auto;
+    border: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-align: left;
+    background: #fff;
+    font-size: 12px;
+    box-shadow: 0 3px 21px rgb(0 0 0 / 10%);
+}

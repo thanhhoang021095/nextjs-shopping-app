@@ -1,0 +1,47 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 1.2em;
+}
+
+.font-14 {
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.font-16 {
+    font-size: 16px;
+    line-height: 1.2em;
+}
+
+.font-25 {
+    font-size: 25px;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.font-h2 {
+    font-size: 45px;
+    font-weight: 300;
+}
+
+.font-h3 {
+    font-size: 36px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.font-h6 {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+
+.text-margin-0 {
+    margin: 0 !important;
+}

@@ -1,0 +1,40 @@
+
+@use "../../../styles/layout.scss";
+@use "../../../styles/responsive.scss";
+
+.swiper-wrapper {
+    display: flex;
+}
+
+.multi-carousel-container {
+    position: relative;
+
+    &__wrapper {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.carousel-button-group {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__left-arrow, &__right-arrow {
+        background-color: transparent;
+        cursor: pointer;
+        font-size: 30px;
+        line-height: 30px;
+        height: 30px;
+    }
+
+    &__left-arrow {
+        left: -35px;
+    }
+}

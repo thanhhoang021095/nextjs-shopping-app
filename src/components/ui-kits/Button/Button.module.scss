@@ -1,0 +1,51 @@
+@use "../../../styles/color.scss";
+@use "../../../styles/layout.scss";
+
+.button {
+    cursor: pointer;
+    background-color: color.$primary-color;
+    color: color.$white-fff;
+    @include layout.flex-center;
+    overflow: hidden;
+    position: relative;
+
+    &:hover {
+        background-color: color.$black-000;
+    }
+
+    &__text {
+        @include layout.flex-center;
+        font-weight: 700;
+    }
+}
+
+.overlay-button {
+    height: 100%;
+    background-color: #000;
+    position: absolute;
+    width: 3px;
+    left: 0;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+        width: 100%;
+    }
+}
+
+
+.reverse-button {
+    background-color: color.$black-000;
+    &:hover {
+        background-color: color.$primary-color;
+    }
+    
+    &__text {
+        color: color.$white-fff;
+    }
+    
+
+}

@@ -1,0 +1,102 @@
+
+@use "../../../styles/layout.scss";
+@use "../../../styles/color.scss";
+@use "../../../styles/responsive.scss";
+
+.new-collection-container {
+    @include responsive.multipleMedia(true, mobile) {
+        padding: 0;
+    }
+    @include responsive.tablet {
+        padding: 0;
+    }
+    margin-top: 100px;
+
+    &__row {
+        &--col {
+            @include responsive.multipleMedia(true, mobile) {
+                margin: 20px 0;
+            }
+            @include layout.flex-row;
+        }
+        // &--col:first-child {
+        //     justify-content: flex-start;
+        //     padding-right: 15px;
+        // }
+        // &--col:last-child {
+        //     padding-left: 15px;
+        //     justify-content: flex-end;
+        // }
+    }
+
+    .new-collection-card {
+        position: relative;
+
+        &__img {
+        }
+        &__content {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            @include layout.flex-column;
+            justify-content: center;
+            left: 40px;
+            width: 100%;
+            margin: auto;
+            // @include responsive.desktop {
+            //     width: 100%;
+            // }
+            // @include responsive.super-desktop {
+            //     width: 100%;
+            // }
+
+            &--title {
+                margin-bottom: 7px;
+                letter-spacing: 1.6px;
+                font-weight: 600;
+                color: color.$primary-color;
+                font-size: 18px;
+                @include responsive.multipleMedia(false, extra-large)  {
+                    font-size: 14px;
+                }
+                @include responsive.multipleMedia(false, mobile) {
+                    font-size: 16px;
+                }
+                @include responsive.multipleMedia(false, small) {
+                    font-size: 14px;
+                }
+            }
+
+            &--name {
+                text-transform: uppercase;
+                margin-bottom: 7px;
+                font-size: 50px;
+                @include responsive.multipleMedia(false, extra-large) {
+                    font-size: 38px;
+                }
+                @include responsive.multipleMedia(false, desktop) {
+                    font-size: 25px;
+                }
+                @include responsive.multipleMedia(false, small) {
+                    font-size: 22px;
+                }
+                // @include responsive.mobile {
+                //     font-size: 25px;
+                // }
+            }
+
+            &--desc {
+                font-size: 14px;
+                max-width: 40%;
+                margin-bottom: 10px;
+            }
+
+            &--btn {
+                margin-top: 10px;
+                // @include responsive.desktop {
+                //     margin-top: 20px;
+                // }
+            }
+        }
+    }
+}
