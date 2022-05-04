@@ -1,4 +1,4 @@
-const configParams = require(`./config/production.json`);
+const configParams = require(`./config/${process.env.NODE_ENV}.json`);
 const path = require('path');
 
 module.exports = {

@@ -1,5 +1,5 @@
 {
     "ENV_NAME": "dev",
-    "API_URL": "http://ss-api.my.dd.com/api/",
+    "BASE_API_URL": "http://ss-api.my.dd.com/api/",
     "PORT": 2024
 }
