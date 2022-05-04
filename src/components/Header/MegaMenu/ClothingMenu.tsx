@@ -16,9 +16,9 @@ interface SubMenuProps {
 }
 
 const SubMenu: React.FC<SubMenuProps> = ({ categoryData = [] }) => {
-  const womenShop = categoryData[0]["subCategory"];
-  const menShop = categoryData[1]["subCategory"];
-  const accessories = categoryData[2]["subCategory"];
+  const womenShop = categoryData[0]?.["subCategory"];
+  const menShop = categoryData[1]?.["subCategory"];
+  const accessories = categoryData[2]?.["subCategory"];
 
   return (
     <div className={styles["menu"]}>
@@ -28,7 +28,7 @@ const SubMenu: React.FC<SubMenuProps> = ({ categoryData = [] }) => {
             <p className={classNames("text-margin-0", styles["menu-col__title"])}>Shop Women's</p>
           </Link>
           <div className={styles["menu-col__list"]}>
-            {womenShop.map((item, idx) => {
+            {womenShop && womenShop.map((item, idx) => {
               return (
                 <Link href={`/sub-category/${item.id}`} key={idx}>
                   <p className={styles["menu-col__list--link"]}>{item.name}</p>  
@@ -42,7 +42,7 @@ const SubMenu: React.FC<SubMenuProps> = ({ categoryData = [] }) => {
             <p className={classNames("text-margin-0", styles["menu-col__title"])}>Shop Men's</p>
           </Link>
           <div className={styles["menu-col__list"]}>
-            {menShop.map((item, idx) => {
+            {menShop && menShop.map((item, idx) => {
               return (
                 <Link href={`/sub-category/${item.id}`} key={idx}>
                   <p className={styles["menu-col__list--link"]}>{item.name}</p>  
@@ -56,7 +56,7 @@ const SubMenu: React.FC<SubMenuProps> = ({ categoryData = [] }) => {
             <p className={classNames("text-margin-0", styles["menu-col__title"])}>Accessories</p>
           </Link>
           <div className={styles["menu-col__list"]}>
-            {accessories.map((item, idx) => {
+            {accessories && accessories.map((item, idx) => {
               return (
                 <Link href={`/sub-category/${item.id}`} key={idx}>
                   <p className={styles["menu-col__list--link"]}>{item.name}</p>  
