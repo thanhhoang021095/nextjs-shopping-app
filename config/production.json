@@ -1,5 +1,5 @@
 {
-    "env_name": "production",
-    "api_url": "https://server.hoang-shop-web.xyz/api/",
-    "port": 6001
+    "ENV_NAME": "production",
+    "API_URL": "https://server.4everjeans.store/api/",
+    "PORT": 6001
 }

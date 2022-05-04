@@ -1,3 +1,1 @@
-const baseUrl = 'http://localhost:2021/api/'
-
-export default baseUrl;
+export default process.env.API_URL;
