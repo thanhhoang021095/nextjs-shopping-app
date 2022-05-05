@@ -72,7 +72,7 @@
     "typescript": "^3.9.5"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=development node server/index.js",
+    "start": "cross-env NODE_ENV=production node server/index.js",
     "build": "next build",
     "dev": "cross-env NODE_ENV=development node server/index.js",
     "test": "react-scripts test",

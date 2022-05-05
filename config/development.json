@@ -1,5 +1,5 @@
 {
     "ENV_NAME": "dev",
-    "BASE_API_URL": "http://ss-api.my.dd.com/api/",
+    "BASE_API_URL": "https://server.4everjeans.shop/api/",
     "PORT": 2024
 }

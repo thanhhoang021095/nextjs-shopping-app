@@ -1,5 +1,5 @@
 {
     "ENV_NAME": "production",
-    "BASE_API_URL": "https://server.4everjeans.store/api/",
+    "BASE_API_URL": "https://server.4everjeans.shop/api/",
     "PORT": 6001
 }
