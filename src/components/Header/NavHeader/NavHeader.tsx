@@ -5,9 +5,9 @@ import styles from './NavHeader.module.scss'
 import classNames from 'classnames'
 import { NavCart } from './NavCart'
 import { NavCategory } from './NavCategory'
+import Link from 'next/link'
 
-interface NavHeaderProps {
-}
+interface NavHeaderProps {}
 
 const NavHeader: React.FC<NavHeaderProps> = (): JSX.Element => {
     const [showDrawer, setShowDrawer] = useState(false);
@@ -43,8 +43,12 @@ const NavHeader: React.FC<NavHeaderProps> = (): JSX.Element => {
                             :
                             <i aria-hidden className={classNames("fas fa-bars", "rotate-nav", styles["navheader-left__icon"])}></i>
                         }
-                        <span className={styles["navheader-left__text"]}>Brand</span>
                     </Button>
+                    <Link href="/">
+                        <span className={styles["navheader-left__text"]}>
+                            4everjeans
+                        </span>
+                    </Link>
                 </Col>
                 <Col span={12} className={styles["navheader-right"]}>
                     <NavCart />

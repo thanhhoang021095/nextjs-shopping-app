@@ -1,14 +1,16 @@
 import IProduct from "./product";
 export interface ICategory {
+    _id?: string;
     id: number;
     image: string;
     name: string;
     description: string;
     productArr: number[];
     hasSubCategory :boolean;
-    subCategory: number[] | null;
+    subCategory: ISubCategory[];
 }
 export interface ISubCategory {
+    _id?: string;
     id: number;
     image: string;
     name: string;

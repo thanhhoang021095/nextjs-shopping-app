@@ -6,7 +6,7 @@ import styles from 'src/styles/pages/account.module.scss'
 import { connect } from 'react-redux'
 import { Input } from 'src/components/ui-kits/Input'
 import { Button } from 'src/components/ui-kits/Button'
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import api from 'controllers/baseApi'
 import endpoint from 'src/utils/endpoints'
 import storageActions from 'controllers/redux/actions/storageActions'
@@ -18,6 +18,7 @@ interface AccountProps {
 }
 
 const Account: React.FC<AccountProps> = ({ userInfo = null, getUserInfo, showToast }): JSX.Element => {
+  const router = useRouter()
   const [account, setAccount] = useState(userInfo?.account ?? "")
   const [password, setPassword] = useState(userInfo?.password ?? "")
   const [fullName, setFullName] = useState(userInfo?.fullName ?? "")
@@ -59,12 +60,12 @@ const Account: React.FC<AccountProps> = ({ userInfo = null, getUserInfo, showToa
       ...updatedInfo
     }).then((res: any) => {
       getUserInfo(updatedInfo);
-      Router.back();
+      router.back();
     }).catch((err) => console.error(err))
   }
 
   const handleCancelUpdate = () => {
-    Router.back();
+    router.back();
   }
 
   const openExpandal = (showExpandal) => {
@@ -98,7 +99,7 @@ const Account: React.FC<AccountProps> = ({ userInfo = null, getUserInfo, showToa
           setNewPassword("");
           setConfirmPassword("");
           setOldPassword("");
-          Router.back();
+          router.back();
           setTimeout(() => {
             showToast("Update password SUCCESS", "success");
           }, 300)

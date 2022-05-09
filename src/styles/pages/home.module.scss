@@ -27,9 +27,7 @@
 }
 
 .home-body {
-    &__product {
-        @include layout.layout-padding;
-    }
+    @include layout.layout-padding;
 }
 
 .carousel-container {
@@ -101,5 +99,68 @@
     &__image {
         display: inline-block;
         object-fit: contain;
+    }
+}
+
+.small-carousel-item {
+    width: 100%;
+    position: relative;
+
+    &__image {
+        width: 100%;
+    }
+
+    &__info {
+        background: rgba(242,242,242,.65);
+        position: absolute;
+        bottom: 20px;
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+        width: 70%;
+    }
+    
+    &__content {
+        @include layout.flex-center;
+        padding: 1rem 1.5rem;
+        flex-direction: column;
+
+        &--name {
+            font-size: 14px;
+            letter-spacing: 1.38px;
+            text-transform: uppercase;
+            color: color.$primary-color;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            @include responsive.multipleMedia(false, tablet) {
+                font-size: 18px;
+            }
+        }
+
+        &--intro {
+            line-height: 0.5em;
+            margin-bottom: 30px;
+            margin-top: 0;
+            font-size: 30px;
+            // @include responsive.multipleMedia(false, extra-large) {
+            //     font-size: 75px;
+            // }
+            @include responsive.multipleMedia(false, tablet) {
+                font-size: 25px;
+            }
+            @include responsive.multipleMedia(false, mobile) {
+                font-size: 20px;
+            }
+        }
+
+        &--desc {
+            font-size: 14px;
+            line-height: 1em;
+            color: #000;
+            margin-bottom: 2em;
+            @include responsive.multipleMedia(false, tablet) {
+                font-size: 16px;
+            }
+        }
     }
 }

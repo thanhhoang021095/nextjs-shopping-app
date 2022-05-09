@@ -34,7 +34,7 @@ const SubCategoryPage: React.FC<SubCategoryPageProps> = ({ subCategory = [], par
   }, [viewAmount]);
 
   useEffect(() => {
-    const data:ISubCategory = subCategory.find(item => item.id == paramId);
+    const data: ISubCategory = subCategory.find(item => item.id == paramId);
     data && setSubCateData(data);
     data?.productArr?.length && setProductList([...data.productArr.slice(0, viewAmount)]);
   }, [subCategory.length]);
@@ -171,53 +171,58 @@ const SubCategoryPage: React.FC<SubCategoryPageProps> = ({ subCategory = [], par
           </Row>
           {/* Filter Bar */}
 
-          {viewType === "list" ?
-            productList.length && productList.map((product, idx) => (
-              <Row key={`${product.id}_${idx}`} gutter={32}>
-                <Col span={24}>
-                  <ProductCard
-                    id={product.id}
-                    imageCover={product.image_cover}
-                    rate={product.rateStar}
-                    productName={product.name}
-                    price={product.price}
-                    isThumb={false}
-                    description={product.description}
-                    showMode="horizontal"
-                    data={product}
-                  />
-                </Col>
-              </Row>
-            ))
-            :
-            <div>
-              <Row gutter={32}>
-                {productList.length && productList.map((product, idx) => (
-                  <Col
-                    span={6}
-                    key={product.id + "_" + idx}
-                    style={{
-                      marginBottom: "32px"
-                    }}
-                  >
-                    <ProductCard
-                      id={product.id}
-                      imageCover={product.image_cover}
-                      style={{
-                        textAlign: "left",
-                        paddingBottom: "45%"
-                      }}
-                      rate={product.rateStar}
-                      productName={product.name}
-                      price={product.price}
-                      isThumb={false}
-                      {...product}
+          {productList.length ?
+            <>
+              {viewType === "list" ?
+                productList.length && productList.map((product, idx) => (
+                  <Row key={`${product.id}_${idx}`} gutter={32}>
+                    <Col span={24}>
+                      <ProductCard
+                        id={product.id}
+                        imageCover={product.image_cover}
+                        rate={product.rateStar}
+                        productName={product.name}
+                        price={product.price}
+                        isThumb={false}
+                        description={product.description}
+                        showMode="horizontal"
+                        data={product}
+                      />
+                    </Col>
+                  </Row>
+                ))
+                :
+                <div>
+                  <Row gutter={32}>
+                    {productList.length && productList.map((product, idx) => (
+                      <Col
+                        span={6}
+                        key={product.id + "_" + idx}
+                        style={{
+                          marginBottom: "32px"
+                        }}
+                      >
+                        <ProductCard
+                          id={product.id}
+                          imageCover={product.image_cover}
+                          style={{
+                            textAlign: "left",
+                            paddingBottom: "45%"
+                          }}
+                          rate={product.rateStar}
+                          productName={product.name}
+                          price={product.price}
+                          isThumb={false}
+                          {...product}
 
-                    />
-                  </Col>
-                ))}
-              </Row>
-            </div>
+                        />
+                      </Col>
+                    ))}
+                  </Row>
+                </div>
+              }
+            </>
+            : <h4>No information displayed</h4>
           }
         </div>
       </div>
@@ -239,4 +244,4 @@ const mapStateToProps = state => ({
   subCategory: state.storage.subCategory
 })
 
-export default connect(mapStateToProps,{})(SubCategoryPage);
+export default connect(mapStateToProps, {})(SubCategoryPage);

@@ -3,7 +3,7 @@ import { InferGetStaticPropsType, GetStaticProps } from 'next'
 import api from 'controllers/baseApi'
 import endpoint from 'src/utils/endpoints'
 import styles from 'src/styles/pages/auth.module.scss'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import { Toast } from 'src/components/ui-kits/Toast'
 import storageActions from 'controllers/redux/actions/storageActions'
 import { connect } from 'react-redux'
@@ -17,11 +17,12 @@ const Register = ({
   getUserInfo,
   getCart,
 }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element => {
-  const [account, setAccount] = useState('')
-  const [pass, setPass] = useState('')
-  const [phone, setPhone] = useState('')
-  const [fullName, setFullName] = useState('')
-  const [address, setAddress] = useState('')
+  const router = useRouter();
+  const [account, setAccount] = useState('');
+  const [pass, setPass] = useState('');
+  const [phone, setPhone] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [address, setAddress] = useState('');
 
   const handleRegister = () => {
     if (!account.length || !pass.length || !phone.length || !fullName.length) {
@@ -46,13 +47,13 @@ const Register = ({
           res.accessToken && saveDataLocal("access_token", res.accessToken);
           res.refreshToken && saveDataLocal("refresh_token", res.refreshToken);
           // back to page
-          Router.push("/")
+          showToast("Register Success", "success");
           setTimeout(() => { 
             getCartInfoFromDB(res.id);
-            showToast("Đăng ký thành công", "success")
+            router.push("/");
           }, 500)
         } else {
-           showToast("Đăng ký thất bại. Vui lòng kiểm tra lại thông tin", "error");
+           showToast("Register Fail. Please check your info again", "error");
          }
       })
       .catch((err) => console.error(err))
@@ -145,7 +146,7 @@ const Register = ({
 
                     <div className={styles['register-link']}>
                         <Link href="/auth/login">
-                            <a href="~">I already have an account</a>
+                          <a href="~">I already have an account</a>
                         </Link>
                     </div>
                 </div>
@@ -158,20 +159,20 @@ const Register = ({
         {/* Back Home */}
         <div className={styles['back-home']}>
             <Button
-                handleClick={() => Router.push('/')}
-                style={{ color: "#ffaf40" }}
+                handleClick={() => router.back()}
+                style={{ color: "#fff", background: "transparent" }}
             >   
                 <Icon  
                     img="/images/icons/back.png"
-                    width="16px"
-                    height="16px"
+                    width="14px"
+                    height="14px"
                     iconStyle={`
-                    filter : invert(72%) sepia(18%) saturate(1702%) hue-rotate(343deg) brightness(103%) contrast(101%); 
-                    margin-right: 3px;
-                    margin-bottom: 2px;
+                      filter : invert(98%) sepia(77%) saturate(344%) hue-rotate(295deg) brightness(118%) contrast(101%);
+                      margin-right: 3px;
+                      margin-bottom: 2px;
                     `}
                 />
-                Back Home
+                Return
             </Button>
         </div>
     </div>

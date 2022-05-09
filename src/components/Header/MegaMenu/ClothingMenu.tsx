@@ -3,7 +3,6 @@ import { Col, Row, Dropdown } from 'antd'
 import styles from './ClothingMenu.module.scss'
 import classNames from 'classnames'
 import Link from 'next/link'
-import { womenShop, menShop, accessories } from './CategoryItems'
 import { ISubCategory } from "src/interfaces/collection";
 import { connect } from 'react-redux'
 

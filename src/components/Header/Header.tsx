@@ -6,8 +6,6 @@ import { MegaMenu } from './MegaMenu'
 import { Row, Col } from 'antd';
 import { Image } from '../ui-kits/CustomImage'
 import Link from 'next/link'
-import endpoints from 'src/utils/endpoints'
-import api from 'controllers/baseApi'
 import classNames from 'classnames'
 import { ISubCategory } from 'src/interfaces/collection'
 

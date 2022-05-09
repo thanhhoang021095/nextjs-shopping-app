@@ -4,7 +4,6 @@ import Layout from 'src/components/Layout/Layout'
 import { getDimensionImageFromUrl, replaceDimensionImageFromUrl } from 'src/utils/common'
 import api from 'controllers/baseApi'
 import endpoint from 'src/utils/endpoints'
-import storageActions from "controllers/redux/actions/storageActions";
 import IProduct from 'src/interfaces/product'
 import IUser from 'src/interfaces/user'
 import styles from 'src/styles/pages/detail.module.scss'
@@ -26,7 +25,6 @@ interface DetailPageProps {
   cart: IProduct[];
   userInfo: IUser;
   prodData: IProduct;
-  getCart: any;
   paramId: number;
 }
 
@@ -305,7 +303,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  getCart: storageActions.getCart,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailPage)

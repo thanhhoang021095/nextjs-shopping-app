@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { saveDataLocal } from 'controllers/redux/lib/reducerConfig';
 import { Toast } from 'src/components/ui-kits/Toast'
 import Link from 'next/link'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import { Button } from 'src/components/ui-kits/Button'
 import { Icon } from 'src/components/ui-kits/Icon'
 
@@ -17,12 +17,13 @@ const TestLogin = ({
   getUserInfo,
   getCart
 }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element => {
-  const [account, setAccount] = useState('')
-  const [pass, setPass] = useState('')
+  const router = useRouter();
+  const [account, setAccount] = useState('');
+  const [pass, setPass] = useState('');
 
   const validateLogin = (): boolean => {
     if (!account.length || !pass.length) {
-      showToast('Bạn chưa điền đủ thông tin', "warning")
+      showToast('You have not filled full our form yet', "warning")
       return false;
     }
     return true;
@@ -63,21 +64,19 @@ const TestLogin = ({
             throw Error(err);
           });
 
-          // Save User Info Into Redux Store
-          getUserInfo(res);
-          // Save Cart Info Into Redux Store
           // save Token
           res.accessToken && saveDataLocal("access_token", res.accessToken);
           res.refreshToken && saveDataLocal("refresh_token", res.refreshToken);
+          
           // back to page
-          Router.back();
-
+          showToast('Login Success', "success");
+          
           setTimeout(() => {
-            getCartInfoFromDB(res.id);
-            showToast('Đăng nhập thành công', "success")
-          }, 500)
+            // getCartInfoFromDB(res.id);
+            router.back();
+          }, 1500);
         } else {
-          showToast('Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin', "error")
+          showToast('Login Fail. Please check your info again', "error")
         }
       })
     }
@@ -134,20 +133,20 @@ const TestLogin = ({
       {/* Back Home */}
       <div className={styles['back-home']}>
         <Button
-          handleClick={() => Router.push('/')}
-          style={{ color: "#4d708e" }}
+          handleClick={() => router.back()}
+          style={{ color: "#fff", background: "transparent" }}
         >
           <Icon
             img="/images/icons/back.png"
-            width="16px"
-            height="16px"
+            width="14px"
+            height="14px"
             iconStyle={`
-                filter : invert(44%) sepia(12%) saturate(1426%) hue-rotate(166deg) brightness(90%) contrast(88%); 
+                filter : invert(98%) sepia(77%) saturate(344%) hue-rotate(295deg) brightness(118%) contrast(101%);
                 margin-right: 3px;
                 margin-bottom: 2px;
             `}
           />
-          Back Home
+          Return
         </Button>
       </div>
     </div>

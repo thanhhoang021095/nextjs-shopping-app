@@ -93,11 +93,9 @@ const CartMenu: React.FC<CartMenuProps> = ({ cartList, removeFromCart = () => { 
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    userInfo: state.storage.userInfo,
-  }
-}
+const mapStateToProps = (state) => ({
+  userInfo: state.storage.userInfo,
+})
 
 const mapDispatchToProps = {
   removeFromCart: storageActions.removeFromCart

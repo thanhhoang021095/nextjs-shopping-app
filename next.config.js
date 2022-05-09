@@ -2,6 +2,9 @@ const configParams = require(`./config/${process.env.NODE_ENV}.json`);
 const path = require('path');
 
 module.exports = {
+  devIndicators: {
+    buildActivity: false
+  },
   env: {
     ...configParams,
   },

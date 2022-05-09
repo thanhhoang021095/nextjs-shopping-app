@@ -5,12 +5,14 @@ import classNames from 'classnames'
 import { CartMenu, AccountMenu } from "../../ToolBox/ToolboxMenu"
 import storageActions from 'controllers/redux/actions/storageActions'
 import { CSSTransition } from 'react-transition-group'
+import IUser from 'src/interfaces/user'
 
 interface NavCartProps {
     cart: any[];
+    userInfo: IUser;
 }
 
-const NavCart: React.FC<NavCartProps> = ({ cart }): JSX.Element => {
+const NavCart: React.FC<NavCartProps> = ({ cart = [], userInfo = null }): JSX.Element => {
     const [showAccountMenu, setShowAccountMenu] = useState(false);
     const [showCartMenu, setShowCartMenu] = useState(false);
 
@@ -99,6 +101,7 @@ const NavCart: React.FC<NavCartProps> = ({ cart }): JSX.Element => {
                     unmountOnExit
                 >
                     <AccountMenu
+                        userInfo={userInfo}
                         isShow={showAccountMenu}
                         style={{
                             maxWidth: "200px",
@@ -111,11 +114,10 @@ const NavCart: React.FC<NavCartProps> = ({ cart }): JSX.Element => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        cart: state.storage.cart
-    }
-}
+const mapStateToProps = state => ({
+    cart: state.storage.cart,
+    userInfo: state.storage.userInfo,
+})
 
 const mapDispatchToProps = {
     getCart: storageActions.getCart,

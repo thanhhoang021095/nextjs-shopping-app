@@ -23,7 +23,7 @@
 
 .login-overlay {
     @include layout.absolute-middle;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.6);
 }
 
 .login-container {
@@ -38,8 +38,8 @@
         width: 300px;
     }
 
-    padding: 40px;
-    background: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    background: rgba(255,255,255,.8);
     box-sizing: border-box;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
     border-radius: 10px;
@@ -50,7 +50,7 @@
         margin-bottom: 20px;
         padding: 0;
         color: color.$primary-color;
-        font-size: 25px;
+        font-size: 35px;
         text-align: center;
     }
 
@@ -62,17 +62,17 @@
                 width: 100%;
                 padding: 10px 0;
                 font-size: 16px;
-                color: #fff;
+                color: color.$black-000;
                 margin-bottom: 30px;
                 border: none;
-                border-bottom: 1px solid #fff;
+                border-bottom: 1px solid color.$black-000;
                 outline: none;
                 background: transparent;
             }
 
             input:focus ~ label,
             input:valid ~ label {
-                top: -20px;
+                top: -30px;
                 left: 0;
                 color: color.$primary-color;
                 font-size: 12px;
@@ -83,8 +83,8 @@
                 top: 0;
                 left: 0;
                 padding: 10px 0;
-                font-size: 16px;
-                color: #fff;
+                font-size: 14px;
+                color: color.$black-000;
                 pointer-events: none;
                 transition: 0.5s;
             }
@@ -108,11 +108,12 @@
                 transition: 0.5s;
                 letter-spacing: 4px;
                 background: transparent;
+                font-weight: 600;
                 cursor: pointer;
     
                 &:hover {
                     background: color.$primary-color;
-                    color: #fff;
+                    color: color.$white-fff;
                     border-radius: 5px;
                     box-shadow: 0 0 5px color.$primary-color, 0 0 25px color.$primary-color, 0 0 50px color.$primary-color, 0 0 100px color.$primary-color;
                 }
@@ -164,7 +165,7 @@
         }
 
         &--register {
-            color: color.$white-fff;
+            color: color.$black-000;
             text-align: center;
             margin-top: 40px;
             cursor: pointer;
@@ -178,6 +179,10 @@
     position: absolute;
     top: 20px;
     left: 20px;
+}
+
+.register-link {
+    margin-top: 20px;
 }
 
 @keyframes btn-anim1 {

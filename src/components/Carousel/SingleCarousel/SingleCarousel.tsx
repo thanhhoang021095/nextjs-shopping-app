@@ -6,6 +6,9 @@ import classNames from 'classnames'
 
 interface SingleCarouselProps {
     children: any;
+    style?: {
+        container: Record<string, any>
+    }
 }
 
 const PreviousButton = ({ prev }):JSX.Element => {
@@ -30,10 +33,9 @@ const NextButton = ({ next }):JSX.Element => {
     )
 }
 
-const SingleCarousel: React.FC<SingleCarouselProps> = ({ children }): JSX.Element => {
-
+const SingleCarousel: React.FC<SingleCarouselProps> = ({ children, style = {} }): JSX.Element => {
     return (
-        <div className={styles['single-carousel-container']}>
+        <div className={styles['single-carousel-container']} style={style?.container}>
             <Carousel
                 className={styles['single-carousel-container__root']}
                 showIndicators={false}

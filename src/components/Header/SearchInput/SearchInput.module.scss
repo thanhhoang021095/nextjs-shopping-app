@@ -1,45 +1,91 @@
 @use "../../../styles/color.scss";
 @use "../../../styles/responsive.scss";
+@use "../../../styles/layout.scss";
 
 .search-container {
-    display: flex;
-    align-items: center;
     position: absolute;
-    right: 120px;
     min-width: 400px;
     background-color: color.$white-fff;
 
-    &__input {
-        border: 1px solid color.$grey-d5dbd9;
-        border-radius: 0;
-        padding: 8px;
-        box-sizing: border-box;
+    .search-section {
+        @include layout.flex-align-center;
 
-        &:focus {
-            outline: none;
-            box-shadow: 1px 10px rgb(82 168 236 / 80%)
+        &__input {
+            border: 1px solid color.$grey-d5dbd9;
+            border-radius: 0;
+            padding: 8px;
+            box-sizing: border-box;
+    
+            &:focus {
+                outline: none;
+                box-shadow: 1px 10px rgb(82 168 236 / 80%)
+            }
+    
+            &:focus, &:hover {
+                border-color: color.$grey-d5dbd9 !important;
+            }
+    
+            &--icon {
+              color: color.$primary-color;
+              margin-right: 10px;
+              font-size: 20px;
+            }
+        }
+    
+        &__button {
+            background: color.$primary-color;
+            color: color.$white-fff;
+            border: none;
+            margin-left: 20px;
+            border-radius: 0;
+    
+            &:hover {
+              background-color: color.$black-000;
+            }
         }
 
-        &:focus, &:hover {
-            border-color: color.$grey-d5dbd9 !important;
+        &__result {
+            position: absolute;
+            top: 100%;
+            height: fit-content;
         }
 
-        &--icon {
-          color: color.$primary-color;
-          margin-right: 10px;
-          font-size: 20px;
+        &__list {
+            background: color.$white-fff;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            max-height: 400px;
+            overflow-y: auto;
         }
     }
+}
 
-    &__button {
-        background: color.$primary-color;
-        color: color.$white-fff;
-        border: none;
+.search-item {
+    padding: .5rem 1rem;
+    @include layout.flex-row;
+    cursor: pointer;
+
+    &:hover {
+        background-color: color.$grey-efefef;
+    }
+
+    &__image {
+        width: 60px;
+        height: 60px;
+    }
+
+    &__info {
+        @include layout.flex-column;        
+        text-align: start;
         margin-left: 20px;
-        border-radius: 0;
+        font-size: 16px;
 
-        &:hover {
-          background-color: color.$black-000;
+        &--name {
+            color: color.$primary-color;
+            margin-bottom: .5rem;
+        }
+
+        &--price {
+            margin-bottom: 0;
         }
     }
 }

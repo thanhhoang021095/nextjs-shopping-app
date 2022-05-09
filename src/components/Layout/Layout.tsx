@@ -35,6 +35,7 @@ const Layout: React.FC<LayoutProps> = ({
 }): JSX.Element => {
   const [mounted, setMounted] = useState(false);
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 991px)' })
+  const isLargeDevice = useMediaQuery({ query: '(min-width: 768px)' });
 
   useEffect(() => {
     setMounted(true);
@@ -54,7 +55,7 @@ const Layout: React.FC<LayoutProps> = ({
           }
         </>
       {/* } */}
-      <div className={styles["header-tape"]}></div>
+      {isLargeDevice && <div className={styles["header-tape"]}></div>}
       <div className={styles['layout-container']}>
         {children}
       </div>

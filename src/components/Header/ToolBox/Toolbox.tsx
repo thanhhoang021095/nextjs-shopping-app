@@ -9,18 +9,21 @@ import { connect } from 'react-redux'
 import { CartMenu, AccountMenu } from "./ToolboxMenu"
 import { CSSTransition } from 'react-transition-group'
 import { SearchInput } from "../SearchInput"
+import IUser from 'src/interfaces/user'
 interface CartProps {
     cart: any[];
     categoryWidth?: number;
+    userInfo: IUser;
 }
 
-const Toolbox: React.FC<CartProps> = ({ cart, categoryWidth = 0 }): JSX.Element => {
+const Toolbox: React.FC<CartProps> = ({ cart, categoryWidth = 0, userInfo = null }): JSX.Element => {
     const [isSearching, setIsSearching] = useState(false);
     const [showCartMenu, setShowCartMenu] = useState(false);
     const [showAccountMenu, setShowAccountMenu] = useState(false);
     const isLargeDevice = useMediaQuery({ query: '(min-width: 1280px)' });
     const cartRef = useRef(null);
     const accountRef = useRef(null);
+    const searchToolboxElm = useRef(null);
 
     const [mounted, setMounted] = useState(false);
     useEffect(() => {
@@ -73,9 +76,12 @@ const Toolbox: React.FC<CartProps> = ({ cart, categoryWidth = 0 }): JSX.Element 
                 >
                     <SearchInput
                         style={{
-                            width: `${categoryWidth}px`
+                            width: `${categoryWidth}px`,
+                            right: "120px"
                         }}
-                        isSearching={isSearching} 
+                        isSearching={isSearching}
+                        setIsSearching={setIsSearching}
+                        searchToolboxElm={searchToolboxElm}
                     />
                 </CSSTransition>
                 <div
@@ -83,6 +89,7 @@ const Toolbox: React.FC<CartProps> = ({ cart, categoryWidth = 0 }): JSX.Element 
                     onClick={() => {
                         setIsSearching(stateSearch => !stateSearch);
                     }}
+                    ref={searchToolboxElm}
                 >
                     {
                         isSearching ?
@@ -144,7 +151,11 @@ const Toolbox: React.FC<CartProps> = ({ cart, categoryWidth = 0 }): JSX.Element 
                     }}
                 >
                     <i aria-hidden className={classNames("fas fa-user", styles["toolbox-col__icon"])}></i>
-                    {isLargeDevice && <span className={styles["toolbox-col__text"]}>Account</span>}
+                    {isLargeDevice && 
+                        <span className={styles["toolbox-col__text"]}>
+                            {userInfo ? `Hello ${userInfo.fullName}` : 'Account'}
+                        </span>
+                    }
                 </Button>
                 <CSSTransition
                     in={showAccountMenu}
@@ -154,6 +165,7 @@ const Toolbox: React.FC<CartProps> = ({ cart, categoryWidth = 0 }): JSX.Element 
                 >
                     <AccountMenu
                         isShow={showAccountMenu}
+                        userInfo={userInfo}
                         style={{
                             maxWidth: "200px",
                             minWidth: "50px"
@@ -165,11 +177,10 @@ const Toolbox: React.FC<CartProps> = ({ cart, categoryWidth = 0 }): JSX.Element 
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        cart: state.storage.cart
-    }
-}
+const mapStateToProps = state => ({
+    cart: state.storage.cart,
+    userInfo: state.storage.userInfo,
+})
 
 const mapDispatchToProps = {
     getCart: storageActions.getCart,

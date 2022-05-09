@@ -85,7 +85,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  getUserInfo: storageActions.getUserInfo,
   updateQtyCart: storageActions.updateQtyCart,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(QuantityButton)

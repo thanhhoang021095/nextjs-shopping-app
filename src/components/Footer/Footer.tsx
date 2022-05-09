@@ -94,7 +94,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className={styles["sub-footer"]}>
-          <Title level={5} className={styles["sub-footer__title"]}>Powered By Hoang-Shop © 2021</Title>
+          <Title level={5} className={styles["sub-footer__title"]}>Powered By 4everjeans Shop © 2022</Title>
         </div>
       </div>
   )

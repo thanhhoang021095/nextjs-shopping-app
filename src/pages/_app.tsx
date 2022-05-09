@@ -11,7 +11,9 @@ import storageActions from 'controllers/redux/actions/storageActions'
 import jwt_decode from "jwt-decode";
 import api from 'controllers/baseApi';
 import endpoint from 'src/utils/endpoints';
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
+import Head from 'next/head';
+
 const CustomLoading = dynamic(() => import('src/components/Loading/Loading'));
 
 function MyApp({ Component, pageProps }): JSX.Element {
@@ -40,29 +42,32 @@ function MyApp({ Component, pageProps }): JSX.Element {
   }, [router]);
 
   useEffect(() =>  {
-    // const access_token: string = JSON.parse(localStorage.getItem("access_token"));
-    // if (access_token) {
-    //   const decoded:any = jwt_decode(access_token);
-    //   if (decoded && decoded.data && Object.keys(decoded).length) {
-    //     const promise1:any = api.get(`${endpoint['user']}/${decoded.data.id}`, access_token)
-    //     const promise2:any = api.get(`${endpoint['cart']}/${decoded.data.id}`, access_token)
-    //     Promise.all([ promise1 , promise2 ])
-    //     .then((res) => {
-    //       if (res?.length) {
-    //         const  { getUserInfo, getCart } = storageActions;
-    //         res[0] && store.dispatch(getUserInfo(res[0]));
-    //         res[1]?.cart && store.dispatch(getCart(res[1].cart));
-    //       };
-    //     })
-    //     .catch((err) => console.error(err));
-    //   }
-    // } else {
-    //   router.push("/auth/login");
-    // }
+    const access_token: string = JSON.parse(localStorage.getItem("access_token"));
+    
+    if (access_token) {
+      const decoded:any = jwt_decode(access_token);
+      if (decoded && decoded.data && Object.keys(decoded).length) {
+        const promise1:any = api.get(`${endpoint['user']}/${decoded.data.id}`, access_token)
+        const promise2:any = api.get(`${endpoint['cart']}/${decoded.data.id}`, access_token)
+        Promise.all([ promise1 , promise2 ])
+        .then((res) => {
+          if (res?.length) {
+            const  { getUserInfo, getCart } = storageActions;
+            res[0] && store.dispatch(getUserInfo(res[0]));
+            res[1]?.cart && store.dispatch(getCart(res[1].cart));
+          };
+        })
+        .catch((err) => console.error(err));
+      }
+    }
   },[])
 
   return (
     <Provider store={store}>
+      <Head>
+        <title>4everjeans - Fashion is mysterious as a rule</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       { loading ?  <CustomLoading /> : <Component {...pageProps} /> }
     </Provider>
   )

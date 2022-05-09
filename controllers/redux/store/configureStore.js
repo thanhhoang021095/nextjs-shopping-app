@@ -2,7 +2,6 @@ import { applyMiddleware, createStore, compose } from 'redux'
 import thunk from 'redux-thunk'
 import rootReducer from '../reducers'
 import { persistStore, persistReducer } from 'redux-persist'
-import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 
 const createNoopStorage = () => {
@@ -19,14 +18,13 @@ const createNoopStorage = () => {
     };
 };
 const storageReduxPersist =
-  typeof window === "undefined" ? createNoopStorage() : createWebStorage();
+  typeof window === "undefined" ? createNoopStorage() : createWebStorage("local");
 
 const middleWare = [thunk]
 
 const persistConfig = {
     key: 'root',
     storage: storageReduxPersist,
-    stateReconciler: autoMergeLevel2
 }
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 

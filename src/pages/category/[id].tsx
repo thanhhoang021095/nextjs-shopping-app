@@ -109,7 +109,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ paramId = 0, category = [] 
           <div className={styles['category-content__define']}>
             <h3>REFINE SEARCH</h3>
             <Row justify="start" gutter={32}>
-              {refineData.length && refineData.map((elm, idx) => (
+              {refineData.length ? refineData.map((elm, idx) => (
                 <Col span={6} key={idx}>
                   <Link href={`/${paramId == 0 ? 'category' : 'sub-category'}/${elm.id}`}>
                     <div className={styles['category-content__thumb']}>
@@ -125,7 +125,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ paramId = 0, category = [] 
                     </div>
                   </Link>
                 </Col>
-              ))}
+              )) : <h4>No information displayed</h4>}
             </Row>
           </div>
         </div>
