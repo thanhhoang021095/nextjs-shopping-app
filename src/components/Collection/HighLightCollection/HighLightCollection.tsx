@@ -23,12 +23,19 @@ const HighLightCollection: React.FC<HighLightCollectionProps> = (): JSX.Element 
     })
 
     useEffect(() => {
-        api.get("highlight")
-            .then((data: any) => {
-                setHightLightList(data);
-                setImageDimension(getDimensionImageFromUrl(data[0].image));
-            })
-            .catch(() => { throw new Error("Cannot find highlight data") })
+        const fetchHighlightData = async (): Promise<void> => {
+            try {
+                const res: any = await api.get('highlight');
+                if (res) {
+                    setHightLightList(res);
+                    setImageDimension(getDimensionImageFromUrl(res[0].image));
+                }
+            } catch (err) {
+                console.error(err)
+            }
+        }
+
+        fetchHighlightData();
     }, [])
 
     return (
@@ -37,7 +44,7 @@ const HighLightCollection: React.FC<HighLightCollectionProps> = (): JSX.Element 
                 className={styles["highlight-collection__row"]}
                 justify="space-between" align="middle" gutter={32}
             >
-                {hightLightList.length && hightLightList.map(item => (
+                {hightLightList?.length && hightLightList.map(item => (
                     <Col
                         key={item._id}
                         xs={24} sm={24} md={8} lg={8} xl={8}

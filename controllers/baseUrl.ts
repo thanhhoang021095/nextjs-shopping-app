@@ -1,3 +1,4 @@
-import { env as config } from "../next.config";
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig();
 
-export default config.BASE_API_URL;
+export default publicRuntimeConfig.BASE_API_URL;

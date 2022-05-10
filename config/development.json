@@ -1,5 +1,5 @@
 {
-    "ENV_NAME": "dev",
+    "ENV_NAME": "development",
     "BASE_API_URL": "http://localhost:2021/api/",
     "PORT": 2024
 }

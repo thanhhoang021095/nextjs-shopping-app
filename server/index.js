@@ -1,5 +1,4 @@
 require('dotenv').config();
-
 const next = require('next')
 const cacheableResponse = require('cacheable-response')
 const express = require('express')
@@ -8,10 +7,9 @@ const config = require('../next.config');
 const customConfig = config.env;
 const envConfig = {...process.env, ...customConfig};
 const port = envConfig.PORT || 6060;
-const dev = envConfig.NODE_ENV === 'dev' ? 'true' : 'false'
+const dev = envConfig.NODE_ENV === 'development' ? 'true' : 'false';
 const app = next({ dev })
 const handler = app.getRequestHandler()
-const path = require('path')
 
 const ssrCache = cacheableResponse({
   ttl: 10000,
