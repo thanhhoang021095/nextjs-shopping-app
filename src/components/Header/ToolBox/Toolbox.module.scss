@@ -8,7 +8,7 @@
     .toolbox-col {
         text-align: end;
         @include responsive.super-desktop {
-            margin: 0 10px;
+            // margin: 0 10px;
         }
         position: relative;
         display: flex;

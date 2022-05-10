@@ -6,11 +6,14 @@ import classNames from 'classnames'
 import { NavCart } from './NavCart'
 import { NavCategory } from './NavCategory'
 import Link from 'next/link'
+import { useMediaQuery } from 'react-responsive'
 
 interface NavHeaderProps {}
 
 const NavHeader: React.FC<NavHeaderProps> = (): JSX.Element => {
     const [showDrawer, setShowDrawer] = useState(false);
+    const isMobileDevice = useMediaQuery({ query: '(max-width: 499px)' })
+    
     useEffect(() => {
         return () => {
             setShowDrawer(false);
@@ -34,7 +37,8 @@ const NavHeader: React.FC<NavHeaderProps> = (): JSX.Element => {
                             display: "flex",
                             alignItems: "center",
                             border: "none",
-                            backgroundColor: "transparent"
+                            backgroundColor: "transparent",
+                            marginLeft: isMobileDevice ? 0 : "-10px",
                         }}
                         handleClick={() => handleShowDrawer(showDrawer)}
                     >

@@ -4,11 +4,9 @@
 
 .search-container {
     position: absolute;
-    min-width: 400px;
     background-color: color.$white-fff;
 
     .search-section {
-        @include layout.flex-align-center;
 
         &__input {
             border: 1px solid color.$grey-d5dbd9;
@@ -31,12 +29,16 @@
               font-size: 20px;
             }
         }
-    
+
+        &__right-col {
+            display: flex;
+            justify-content: right;
+        }
+
         &__button {
             background: color.$primary-color;
             color: color.$white-fff;
             border: none;
-            margin-left: 20px;
             border-radius: 0;
     
             &:hover {
@@ -82,6 +84,12 @@
         &--name {
             color: color.$primary-color;
             margin-bottom: .5rem;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.625;
+            display: -webkit-box;
         }
 
         &--price {

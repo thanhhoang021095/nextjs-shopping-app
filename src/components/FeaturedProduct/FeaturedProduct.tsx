@@ -13,7 +13,6 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (): JSX.Element => {
     const isDesktopDevice = useMediaQuery({ query: '(max-width: 1024px)' })
     const isTabletDevice = useMediaQuery({ query: '(max-width: 991px)' })
     const isMobileDevice = useMediaQuery({ query: '(max-width: 768px)' })
-    const [activeData, setActiveData] = useState(null);
 
     const [defaultProducts, setDefaultProducts] = useState([]);
     const [thumbProducts, setThumbProducts] = useState([]);

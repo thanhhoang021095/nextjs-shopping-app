@@ -4,7 +4,7 @@
 @use "../../../styles/responsive.scss";
 
 .new-collection-container {
-    @include responsive.multipleMedia(true, mobile) {
+    @include responsive.mobile {
         padding: 0;
     }
     @include responsive.tablet {
@@ -14,7 +14,7 @@
 
     &__row {
         &--col {
-            @include responsive.multipleMedia(true, mobile) {
+            @include responsive.mobile {
                 margin: 20px 0;
             }
             @include layout.flex-row;
@@ -56,14 +56,17 @@
                 font-weight: 600;
                 color: color.$primary-color;
                 font-size: 18px;
-                @include responsive.multipleMedia(false, extra-large)  {
+                @include responsive.super-desktop {
                     font-size: 14px;
                 }
-                @include responsive.multipleMedia(false, mobile) {
-                    font-size: 16px;
-                }
-                @include responsive.multipleMedia(false, small) {
+                @include responsive.tablet {
                     font-size: 14px;
+                }
+                @include responsive.small {
+                    font-size: 14px;
+                }
+                @include responsive.mobile {
+                    font-size: 10px;
                 }
             }
 
@@ -71,24 +74,36 @@
                 text-transform: uppercase;
                 margin-bottom: 7px;
                 font-size: 50px;
-                @include responsive.multipleMedia(false, extra-large) {
+                @include responsive.super-desktop {
                     font-size: 38px;
                 }
-                @include responsive.multipleMedia(false, desktop) {
+                @include responsive.desktop {
                     font-size: 25px;
                 }
-                @include responsive.multipleMedia(false, small) {
+                @include responsive.small {
                     font-size: 22px;
                 }
-                // @include responsive.mobile {
-                //     font-size: 25px;
-                // }
+                @include responsive.tablet {
+                    font-size: 18px;
+                }
+                @include responsive.mobile {
+                    font-size: 10px;
+                }
             }
 
             &--desc {
                 font-size: 14px;
                 max-width: 40%;
                 margin-bottom: 10px;
+                @include responsive.small {
+                    font-size: 12px;
+                }
+                @include responsive.tablet {
+                    font-size: 12px;
+                }
+                @include responsive.mobile {
+                    font-size: 8px;
+                }
             }
 
             &--btn {

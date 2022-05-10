@@ -7,14 +7,13 @@ import withApollo from '../utils/withApollo'
 // import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import api from "../../controllers/baseApi";
 import endpoint from "../utils/endpoints";
-import { useRouter } from 'next/router'
+import router, { useRouter } from 'next/router'
 import styles from '../styles/pages/home.module.scss'
 import dynamic from 'next/dynamic'
 import { Image } from 'src/components/ui-kits/CustomImage'
 import { Button } from '../components/ui-kits/Button'
 import { SingleCarousel } from 'src/components/Carousel'
 import { useMediaQuery } from 'react-responsive'
-import { SearchInput } from 'src/components/Header/SearchInput';
 
 // dynamic import
 const Carousel = dynamic(() => import("../components/Carousel/CustomCarousel/CustomCarousel"))
@@ -22,13 +21,11 @@ const HighLightCollection = dynamic(() => import("../components/Collection/HighL
 const FeaturedProduct = dynamic(() => import("../components/FeaturedProduct/FeaturedProduct"))
 const NewCollection = dynamic(() => import("../components/Collection/NewCollection/NewCollection"))
 
-interface HomeProps {
-}
+interface HomeProps {}
 
-const Home: React.FC<HomeProps> = ({
-}): JSX.Element => {
+const Home: React.FC<HomeProps> = (): JSX.Element => {
   const [carouselData, setCarouselData] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
+  const [carouselElm, setCarouselElm] = useState(null);
   const Router = useRouter();
   const isLargeDevice = useMediaQuery({ query: '(min-width: 768px)' });
 
@@ -45,63 +42,53 @@ const Home: React.FC<HomeProps> = ({
     }
 
     fetchData();
-  }, [])
-
+  }, []);
+  
   return (
     <>
       <Layout isHomeRoute={Router.pathname === "/" || Router.pathname === "/home"}>
         <div className={styles['home-body']}>
           {!isLargeDevice ?
-            <>
-              <SearchInput 
-                isSearching={isSearching}
-                setIsSearching={setIsSearching}
-                style={{ 
-                  position: "relative",
-                  margin: "40px 0",
-                  zIndex: 99
-                }}
-              />
-              <SingleCarousel>
-                {carouselData.length && carouselData.map((item, idx) => (
-                  <div className={styles['small-carousel-item']} key={`${item.id}_${idx}`}>
-                    <div className={styles['small-carousel-item__image']}>
-                      <Image
-                        src={item.image}
-                        width="605"
-                        height="800"
-                        alt={`image ${item.id}`}
-                      />
-                    </div>
-                    <div className={styles['small-carousel-item__info']}>
-                      <div className={styles['small-carousel-item__content']}>
-                        <h5 className={styles['small-carousel-item__content--name']}>
-                          {item.name}
-                        </h5>
-                        <h4 className={styles['small-carousel-item__content--intro']}>
-                          {item.intro}
-                        </h4>
-                        <p className={styles['small-carousel-item__content--desc']}>
-                          {item.description}
-                        </p>
-                        <Button
-                          transitionWidth
-                          style={{
-                            padding: "20px 35px",
-                            fontSize: "12px",
-                            fontWeight: "600",
-                            height: "50px",
-                            boxSizing: "border-box",
-                            textTransform: "uppercase"
-                          }}>
-                          Shop now
-                        </Button>
-                      </div>
+            <SingleCarousel >
+              {carouselData.length && carouselData.map((item, idx) => (
+                <div className={styles['small-carousel-item']} key={`${item.id}_${idx}`}>
+                  <div className={styles['small-carousel-item__image']}>
+                    <Image
+                      src={item.image}
+                      width="605"
+                      height="800"
+                      alt={`image ${item.id}`}
+                    />
+                  </div>
+                  <div className={styles['small-carousel-item__info']}>
+                    <div className={styles['small-carousel-item__content']}>
+                      <h5 className={styles['small-carousel-item__content--name']}>
+                        {item.name}
+                      </h5>
+                      <h4 className={styles['small-carousel-item__content--intro']}>
+                        {item.intro}
+                      </h4>
+                      <p className={styles['small-carousel-item__content--desc']}>
+                        {item.description}
+                      </p>
+                      <Button
+                        transitionWidth
+                        handleClick={() => router.push(`/product-detail/${item.linkProductId}`)}
+                        style={{
+                          padding: "20px 35px",
+                          fontSize: "12px",
+                          fontWeight: "600",
+                          height: "50px",
+                          boxSizing: "border-box",
+                          textTransform: "uppercase"
+                        }}>
+                        Shop now
+                      </Button>
                     </div>
                   </div>
-                ))}
-              </SingleCarousel>
-            </>
+                </div>
+              ))}
+            </SingleCarousel>
             :
             <Carousel
               data={carouselData}
@@ -128,6 +115,7 @@ const Home: React.FC<HomeProps> = ({
                       </p>
                       <Button
                         transitionWidth
+                        handleClick={() => router.push(`/product-detail/${item.linkProductId}`)}
                         style={{
                           padding: "20px 35px",
                           fontSize: "12px",

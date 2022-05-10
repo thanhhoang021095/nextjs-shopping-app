@@ -65,8 +65,8 @@ function MyApp({ Component, pageProps }): JSX.Element {
   return (
     <Provider store={store}>
       <Head>
-        <title>4everjeans - Fashion is mysterious as a rule</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title> - Fashion is mysterious as a rule</title>
+        <link rel="icon" href="/images/logo/logo.svg" />
       </Head>
       { loading ?  <CustomLoading /> : <Component {...pageProps} /> }
     </Provider>

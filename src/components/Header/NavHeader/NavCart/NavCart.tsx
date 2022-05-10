@@ -90,8 +90,9 @@ const NavCart: React.FC<NavCartProps> = ({ cart = [], userInfo = null }): JSX.El
                         setShowCartMenu(false);
                         setShowAccountMenu(!showAccountMenu);
                     }}
+                    style={{ paddingRight: 0 }}
                 >
-                    <i aria-hidden className={classNames("fas fa-cog", styles["account-dropdown__button--icon"])}></i>
+                    <i aria-hidden className={classNames("fas fa-user", styles["account-dropdown__button--icon"])}></i>
 
                 </button>
                 <CSSTransition

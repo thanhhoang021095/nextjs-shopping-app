@@ -29,8 +29,15 @@ interface DetailPageProps {
 }
 
 const DetailPage: React.FC<DetailPageProps> = ({ prodData, paramId }): JSX.Element => {
+  const genImgUniqueId = (index: number) => {
+    return `${paramId}_${index}`
+  }
+  
   const [activeImage, setActiveImage] = useState(() => {
-    return prodData?.images?.length ? prodData.images[0] : ""
+    return prodData?.images?.length ? {
+      id: genImgUniqueId(0),
+      img: prodData.images[0]
+    } : null
   })
   const [activeTab, setActiveTab] = useState(0);
   const [relatedData, setRelatedData] = useState([]);
@@ -68,7 +75,10 @@ const DetailPage: React.FC<DetailPageProps> = ({ prodData, paramId }): JSX.Eleme
   }, [])
 
   useEffect(() => {
-    prodData?.images?.length && setActiveImage(prodData.images[0]);
+    prodData?.images?.length && setActiveImage({
+      id: genImgUniqueId(0),
+      img: prodData.images[0]
+    });
   }, [paramId])
 
   const getDimensionImgAfterResize = (url: string): { width: string; height: string } => {
@@ -122,6 +132,7 @@ const DetailPage: React.FC<DetailPageProps> = ({ prodData, paramId }): JSX.Eleme
                             data={prodData.images}
                             handleClick={setActiveImage}
                             activeItem={activeImage}
+                            genImgUniqueId={genImgUniqueId}
                             renderProps={(item) => (
                               <Image
                                 src={item}
@@ -144,7 +155,7 @@ const DetailPage: React.FC<DetailPageProps> = ({ prodData, paramId }): JSX.Eleme
                           >
                             <GlassMagnifier
                               className={styles['detail-content__cover--glass']}
-                              imageSrc={replaceDimensionImageFromUrl(activeImage, 800, 800)}
+                              imageSrc={replaceDimensionImageFromUrl(activeImage.img, 800, 800)}
                               imageAlt="image cover"
                               magnifierBorderSize={1}
                               magnifierSize="25%"
@@ -160,7 +171,7 @@ const DetailPage: React.FC<DetailPageProps> = ({ prodData, paramId }): JSX.Eleme
                         <SingleCarousel>
                           {prodData.images?.length && prodData.images.map((item, idx) => (
                             <Image
-                              key={idx}
+                              key={paramId + "_" + idx}
                               src={replaceDimensionImageFromUrl(item, 800, 800)}
                               width={getDimensionImgAfterResize(item).width}
                               height={getDimensionImgAfterResize(item).height}
@@ -172,7 +183,6 @@ const DetailPage: React.FC<DetailPageProps> = ({ prodData, paramId }): JSX.Eleme
                     }
                   </Row>
                 </Col>
-
 
                 <Col
                   className={styles['detail-content__info']}
@@ -244,8 +254,11 @@ const DetailPage: React.FC<DetailPageProps> = ({ prodData, paramId }): JSX.Eleme
               </h3>
               <MultiCarousel
                 data={relatedData}
-                renderProps={item => (
-                  <div className={styles["multi-carousel-item"]}>
+                renderProps={(item, idx) => {
+                  return (
+                  <div 
+                    className={styles["multi-carousel-item"]}
+                  >
                     <ProductCard
                       id={item.id}
                       centerMode
@@ -257,7 +270,7 @@ const DetailPage: React.FC<DetailPageProps> = ({ prodData, paramId }): JSX.Eleme
                       data={item}
                     />
                   </div>
-                )}
+                )}}
               />
             </div>
           </div>

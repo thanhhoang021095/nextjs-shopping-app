@@ -32,6 +32,7 @@ const collectionData = [
 const NewCollection: React.FC<NewCollectionProps> = (): JSX.Element => {
     const [isHover, setIsHover] = useState(null);
     const isSmallDevice = useMediaQuery({ query: '(max-width: 991px)' })
+    const isMobileDevice = useMediaQuery({ query: '(max-width: 499px)' })
     return (
         <div className={styles["new-collection-container"]}>
             <Row
@@ -80,10 +81,10 @@ const NewCollection: React.FC<NewCollectionProps> = (): JSX.Element => {
                                     <Button
                                         transitionWidth
                                         style={{
-                                            padding: "18px 39px",
-                                            fontSize: "12px",
+                                            padding: isMobileDevice ? "10px 16px" : "18px 39px",
+                                            fontSize: isMobileDevice ? "8px" : "12px",
                                             width: "fit-content",
-                                            height: "50px",
+                                            height: isMobileDevice ? "30px" : "50px",
                                             fontWeight: 700,
                                             boxSizing: "border-box",
                                             textTransform: "uppercase"

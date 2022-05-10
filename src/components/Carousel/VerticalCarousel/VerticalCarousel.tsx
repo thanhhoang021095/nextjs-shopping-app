@@ -7,21 +7,29 @@ interface VerticalCarouselProps {
     data: string[];
     renderProps: any;
     handleClick: any;
-    activeItem: string;
-    style?: Record<string, any>
+    activeItem: {
+        id: string;
+        img: string;
+    };
+    style?: Record<string, any>;
+    genImgUniqueId?: (idx: number) => string;
 }
 
-const VerticalCarousel: React.FC<VerticalCarouselProps> = ({ data, renderProps, handleClick, activeItem, style = {} }): JSX.Element => {
+const VerticalCarousel: React.FC<VerticalCarouselProps> = ({
+    data,
+    renderProps,
+    handleClick,
+    activeItem,
+    style = {},
+    genImgUniqueId = () => ""
+}): JSX.Element => {
     const [scrollVal, setScrollVal] = useState(0);
-    const [containerHeight, setContainerHeight] = useState(0);
-    const [scrollHeight, setScrollHeight] = useState(0);
-    const [elmHeight, setElmHeight] = useState(0);
 
     const parentElm = useRef(null);
     const containerElm = useRef(null);
     const scrollElm = useRef(null);
 
-    const handleChooseUpItem = ():void => {
+    const handleChooseUpItem = (): void => {
         const elmHeightVal = scrollElm.current.clientHeight
         if (scrollVal <= 0) {
             if (Math.abs(scrollVal) > elmHeightVal) {
@@ -32,7 +40,7 @@ const VerticalCarousel: React.FC<VerticalCarouselProps> = ({ data, renderProps, 
         }
     }
 
-    const handleChooseDownItem = ():void => {
+    const handleChooseDownItem = (): void => {
         const scrollHeightVal: number = parentElm.current.clientHeight;
         const containerHeightVal: number = containerElm.current.clientHeight;
         const elmHeightVal = scrollElm.current.clientHeight
@@ -46,23 +54,8 @@ const VerticalCarousel: React.FC<VerticalCarouselProps> = ({ data, renderProps, 
         }
     }
 
-    
-    useEffect(() => {
-        const getHeightInfo = ():void => {
-            parentElm?.current && setScrollHeight(parentElm.current.clientHeight);
-            containerElm?.current && setContainerHeight(containerElm.current.clientHeight);
-            scrollElm?.current && setElmHeight(scrollElm.current.clientHeight);
-        }
-        getHeightInfo();
-        window.addEventListener('resize', getHeightInfo);
-        return () => {
-            window.removeEventListener('resize', getHeightInfo);
-        }
-    }, [])
-
-
     return (
-        <div 
+        <div
             className={styles["vertical-carousel"]}
             style={style}
         >
@@ -80,7 +73,7 @@ const VerticalCarousel: React.FC<VerticalCarouselProps> = ({ data, renderProps, 
                     >
                         <div
                             className={styles["carousel-slide"]}
-                            >
+                        >
                             <div
                                 className={styles["carousel-slide__inner"]}
                                 ref={parentElm}
@@ -92,7 +85,7 @@ const VerticalCarousel: React.FC<VerticalCarouselProps> = ({ data, renderProps, 
                                             styles["carousel-item"],
                                             { [styles["last-item"]]: idx === data.length - 1 },
                                             { [styles["first-item"]]: idx === 0 },
-                                            { [styles["active-item"]]:  item === activeItem }
+                                            { [styles["active-item"]]: item === activeItem.img && genImgUniqueId(idx) == activeItem.id }
                                         )}
                                         key={idx}
                                         style={{
@@ -100,7 +93,10 @@ const VerticalCarousel: React.FC<VerticalCarouselProps> = ({ data, renderProps, 
                                             transition: "all .3s ease",
                                             scrollBehavior: "smooth"
                                         }}
-                                        onClick={() => handleClick(item)}
+                                        onClick={() => handleClick({
+                                            id: genImgUniqueId(idx),
+                                            img: item
+                                        })}
                                     >
                                         {renderProps(item)}
                                     </div>

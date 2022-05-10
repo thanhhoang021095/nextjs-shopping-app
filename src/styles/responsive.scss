@@ -2,11 +2,12 @@
 /* Set các giá trị với màn hình tương ứng */
 
 $breakpoints: (
-  mobile: 500px,
-  tablet: 768px,
-  small: 991px,
-  desktop: 1024px,
-  extra-large: 1280px,
+  mobile: '(max-width: 500px)',
+  tablet: '(max-width: 768px) and (min-width: 500px)',
+  small: '(max-width: 991px) and (min-width: 768px)',
+  medium:'(max-width: 1024px) and (min-width: 991px)',
+  desktop: '(min-width: 1024px)',
+  extra-large: '(min-width: 1300px)',
 );
 
 @mixin mediaMinMax($minBreakpoint, $maxBreakpoint) {
@@ -26,7 +27,7 @@ $breakpoints: (
       @content;
     }
   }
-  @else {
+  @if else $minBreakpoint != 0 and  $maxBreakpoint != 0  {
     @media (min-width: $minBreakpoint) and (max-width: $maxBreakpoint) {
       @content;
     }
@@ -34,31 +35,37 @@ $breakpoints: (
 }
 
 @mixin mobile {
-  @media only screen and (max-width: map-get($breakpoints, mobile)) {
+  @media #{map-get($breakpoints, "mobile")} {
     @content;
   }
 }
 
 @mixin tablet {
-  @media only screen and (max-width: map-get($breakpoints, tablet)) {
+  @media #{map-get($breakpoints, "tablet")} {
     @content;
   }
 }
 
 @mixin small {
-  @media only screen and (max-width: map-get($breakpoints, small)) {
+  @media #{map-get($breakpoints, "small")} {
+    @content;
+  }
+}
+
+@mixin medium {
+  @media #{map-get($breakpoints, "medium")} {
     @content;
   }
 }
 
 @mixin desktop {
-  @media only screen and (max-width: map-get($breakpoints, desktop)) {
+  @media #{map-get($breakpoints, "desktop")} {
     @content;
   }
 }
 
 @mixin super-desktop {
-  @media only screen and (min-width: map-get($breakpoints, extra-large)) {
+  @media #{map-get($breakpoints, "extra-large")} {
     @content;
   }
 }

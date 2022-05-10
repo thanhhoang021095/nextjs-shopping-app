@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './MultiCarousel.module.scss'
 import IProduct from 'src/interfaces/product';
 import Carousel from "react-multi-carousel";
-import ButtonGroup from "./ButtonGroup";
+
 import "react-multi-carousel/lib/styles.css";
 
 interface MultiCarouselProps {
@@ -14,19 +14,19 @@ interface MultiCarouselProps {
 const MultiCarousel: React.FC<MultiCarouselProps> = ({ data = [], renderProps, deviceType = "desktop" }): JSX.Element => {
   const responsive = {
     superLargeDesktop: {
-      breakpoint: { max: 4000, min: 1550 },
+      breakpoint: { max: 4000, min: 1300 },
       items: 4
     },
     desktop: {
-      breakpoint: { max: 1550, min: 1124 },
+      breakpoint: { max: 1300, min: 1024 },
       items: 3,
     },
     tablet: {
-      breakpoint: { max: 1124, min: 500 },
+      breakpoint: { max: 1024, min: 501 },
       items: 2,
     },
     mobile: {
-      breakpoint: { max: 500, min: 0 },
+      breakpoint: { max: 501, min: 0 },
       items: 1,
     }
   };
@@ -35,13 +35,14 @@ const MultiCarousel: React.FC<MultiCarouselProps> = ({ data = [], renderProps, d
       <Carousel
         ssr
         partialVisible
-        itemClass="image-item"
+        itemClass={styles['multi-carousel-container__item']}
         deviceType={deviceType}
+        keyBoardControl
         responsive={responsive}
       >
-        {data.map((item) => (
-          <div key={item.id} style={{ height: "100%" }}>
-            {renderProps(item)}
+        {data.map((item, idx) => (
+          <div key={item._id} style={{ height: "100%" }}>
+            {renderProps(item, idx)}
           </div>
         ))}
       </Carousel>

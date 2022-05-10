@@ -56,12 +56,11 @@
     padding-left: 6.5rem;
     padding-right: 6.5rem;
 
-    @include responsive.multipleMedia(false, extra-large) {
-        padding-left: 4rem;
-        padding-right: 4rem;
+    @include responsive.tablet {
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
-
-    @include responsive.multipleMedia(false, small) {
+    @include responsive.mobile {
         padding-left: 2rem;
         padding-right: 2rem;
     }

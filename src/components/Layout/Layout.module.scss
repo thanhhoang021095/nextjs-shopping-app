@@ -10,19 +10,34 @@
     @include responsive.tablet {
         padding-top: 0;
     }
+    @include responsive.mobile {
+        padding-top: 0;
+    }
 }
 
 .header-tape {
     background-color: color.$primary-color;
-    height: 65rem;
-    @include responsive.multipleMedia(false, extra-large) {
-        height: 55rem;
-    }
-    @include responsive.multipleMedia(false, desktop) {
-        height: 50rem;
-    }
     position: absolute;
     top: 0;
     left: 0;
-    width: 22vw;
+    width: 21vw;
+
+    @include responsive.small {
+        height: 44rem;
+        width: 20vw;
+    }
+    @include responsive.medium {
+        height: 48rem;
+        width: 22vw;
+    }
+    @include responsive.desktop {
+        height: 55rem;
+        width: 22vw;
+    }
+    @include responsive.mediaCustom(1024, 1300px) {
+        height: 60rem;
+    }
+    @include responsive.super-desktop {
+        height: 62rem;
+    }
 }

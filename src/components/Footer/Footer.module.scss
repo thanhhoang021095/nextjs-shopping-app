@@ -25,6 +25,11 @@
             padding-top: 50px;
             padding-bottom: 40px;
         }
+        @include responsive.mobile {
+            text-align: center;
+            padding-top: 50px;
+            padding-bottom: 40px;
+        }
     }
     
     .footer-container {

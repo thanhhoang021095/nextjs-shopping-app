@@ -11,13 +11,19 @@ interface SearchItemResultProps {
 const SearchItemResult: React.FC<SearchItemResultProps> = ({ data }) => {
     const router = useRouter();
     return (
-        <div className={styles["search-item"]} onClick={() => router.push(`/product-detail/${data.id}`)}>
+        <div className={styles["search-item"]} onClick={() => {
+            router.push(`/product-detail/${data.id}`)
+        }}>
             <div className={styles["search-item__image"]}>
                 <Image
                     src={data.image_cover}
                     width="100%"
                     height="100%"
                     alt="product_image-cover"
+                    style={{
+                        width: "60px",
+                        height: "60px",
+                    }}
                 />
             </div>
             <div className={styles["search-item__info"]}>

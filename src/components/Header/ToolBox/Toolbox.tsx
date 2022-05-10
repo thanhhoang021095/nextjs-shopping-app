@@ -10,6 +10,8 @@ import { CartMenu, AccountMenu } from "./ToolboxMenu"
 import { CSSTransition } from 'react-transition-group'
 import { SearchInput } from "../SearchInput"
 import IUser from 'src/interfaces/user'
+import { NavCart } from '../NavHeader/NavCart'
+
 interface CartProps {
     cart: any[];
     categoryWidth?: number;
@@ -17,10 +19,13 @@ interface CartProps {
 }
 
 const Toolbox: React.FC<CartProps> = ({ cart, categoryWidth = 0, userInfo = null }): JSX.Element => {
-    const [isSearching, setIsSearching] = useState(false);
+    const [isOpenSearch, setIsOpenSearch] = useState(false);
     const [showCartMenu, setShowCartMenu] = useState(false);
     const [showAccountMenu, setShowAccountMenu] = useState(false);
-    const isLargeDevice = useMediaQuery({ query: '(min-width: 1280px)' });
+
+    const isLargeDevice = useMediaQuery({ query: '(min-width: 768px)' });
+    const isBelowMediumDevice = useMediaQuery({ query: '(max-width: 1200px)' });
+
     const cartRef = useRef(null);
     const accountRef = useRef(null);
     const searchToolboxElm = useRef(null);
@@ -63,13 +68,13 @@ const Toolbox: React.FC<CartProps> = ({ cart, categoryWidth = 0, userInfo = null
 
     return (
         mounted &&
-        <Row className={styles["toolbox"]} justify="end">
+        <Row className={styles["toolbox"]} justify="end" gutter={16}>
             <Col
-                xl={4} lg={4} md={6} sm={6}
+                xxl={10} xl={4} lg={8} md={10}
                 className={styles["toolbox-col"]}
             >
                 <CSSTransition
-                    in={isSearching}
+                    in={isOpenSearch}
                     timeout={300}
                     classNames="slide-animate"
                     unmountOnExit
@@ -79,100 +84,105 @@ const Toolbox: React.FC<CartProps> = ({ cart, categoryWidth = 0, userInfo = null
                             width: `${categoryWidth}px`,
                             right: "120px"
                         }}
-                        isSearching={isSearching}
-                        setIsSearching={setIsSearching}
                         searchToolboxElm={searchToolboxElm}
                     />
                 </CSSTransition>
                 <div
                     className={styles["toolbox-col__search"]}
                     onClick={() => {
-                        setIsSearching(stateSearch => !stateSearch);
+                        setIsOpenSearch(status => !status);
                     }}
                     ref={searchToolboxElm}
                 >
                     {
-                        isSearching ?
+                        isOpenSearch ?
                             <i aria-hidden className={classNames("fas fa-times", styles["toolbox-col__search--icon"])}></i>
                             :
                             <i aria-hidden className={classNames("fas fa-search", styles["toolbox-col__search--icon"])}></i>
                     }
                 </div>
             </Col>
-            <Col
-                xl={6} lg={4} md={6} sm={4}
-                className={classNames(styles["toolbox-col"])}
-                ref={cartRef}
-            >
-                <Button
-                    handleClick={(e) => {
-                        e.preventDefault();
-                        setShowAccountMenu(false);
-                        setShowCartMenu(!showCartMenu);
-                    }}
-                    style={{
-                        color: "#000",
-                        fontSize: "14px",
-                        border: "none",
-                        padding: 0,
-                        background: "transparent",
-                    }}
-                >
-                    <i aria-hidden className={classNames("fas fa-shopping-cart", styles["toolbox-col__icon"])}></i>
-                    {isLargeDevice && <span className={styles["toolbox-col__text"]}>{cart.length} item(s)</span>}
-                </Button>
-                <CSSTransition
-                    in={showCartMenu}
-                    timeout={300}
-                    classNames="swing-menu-animate"
-                    unmountOnExit
-                >
-                    <CartMenu cartList={cart} />
-                </CSSTransition>
-            </Col>
-            <Col
-                xl={6} lg={4} md={6} sm={4}
-                className={classNames(styles["toolbox-col"])}
-                ref={accountRef}
-            >
+            {isBelowMediumDevice ?
+                <NavCart />
+                : 
+                <>
+                    <Col
+                        xxl={7} xl={10} lg={0} md={0}
+                        className={classNames(styles["toolbox-col"])}
+                        ref={cartRef}
+                    >
+                        <Button
+                            handleClick={(e) => {
+                                e.preventDefault();
+                                setShowAccountMenu(false);
+                                setShowCartMenu(!showCartMenu);
+                            }}
+                            style={{
+                                color: "#000",
+                                fontSize: "14px",
+                                border: "none",
+                                padding: 0,
+                                background: "transparent",
+                            }}
+                        >
+                            <i aria-hidden className={classNames("fas fa-shopping-cart", styles["toolbox-col__icon"])}></i>
+                            {!isBelowMediumDevice && <span className={styles["toolbox-col__text"]}>{cart.length} item(s)</span>}
+                        </Button>
 
-                <Button
-                    handleClick={(e) => {
-                        e.preventDefault();
-                        setShowCartMenu(false);
-                        setShowAccountMenu(!showAccountMenu)
-                    }}
-                    style={{
-                        color: "#000",
-                        fontSize: "14px",
-                        border: "none",
-                        padding: 0,
-                        background: "transparent",
-                    }}
-                >
-                    <i aria-hidden className={classNames("fas fa-user", styles["toolbox-col__icon"])}></i>
-                    {isLargeDevice && 
-                        <span className={styles["toolbox-col__text"]}>
-                            {userInfo ? `Hello ${userInfo.fullName}` : 'Account'}
-                        </span>
-                    }
-                </Button>
-                <CSSTransition
-                    in={showAccountMenu}
-                    timeout={300}
-                    classNames="swing-menu-animate"
-                    unmountOnExit
-                >
-                    <AccountMenu
-                        isShow={showAccountMenu}
-                        userInfo={userInfo}
-                        style={{
-                            maxWidth: "200px",
-                            minWidth: "50px"
-                        }}
-                    />
-                </CSSTransition>
-            </Col>
+                        <CSSTransition
+                            in={showCartMenu}
+                            timeout={300}
+                            classNames="swing-menu-animate"
+                            unmountOnExit
+                        >
+                            <CartMenu cartList={cart} />
+                        </CSSTransition>
+                    </Col>
+                    <Col
+                        xxl={7} xl={10} lg={0} md={0}
+                        className={classNames(styles["toolbox-col"])}
+                        ref={accountRef}
+                    >
+                        <Button
+                            handleClick={(e) => {
+                                e.preventDefault();
+                                setShowCartMenu(false);
+                                setShowAccountMenu(!showAccountMenu)
+                            }}
+                            style={{
+                                color: "#000",
+                                fontSize: "14px",
+                                border: "none",
+                                padding: 0,
+                                background: "transparent",
+                            }}
+                        >
+                            <i aria-hidden className={classNames("fas fa-user", styles["toolbox-col__icon"])}></i>
+                            {isLargeDevice &&
+                                <span className={styles["toolbox-col__text"]}>
+                                    {userInfo ? `Hello ${userInfo.fullName}` : 'Account'}
+                                </span>
+                            }
+                        </Button>
+
+                        <CSSTransition
+                            in={showAccountMenu}
+                            timeout={300}
+                            classNames="swing-menu-animate"
+                            unmountOnExit
+                        >
+                            <AccountMenu
+                                isShow={showAccountMenu}
+                                userInfo={userInfo}
+                                style={{
+                                    maxWidth: "200px",
+                                    minWidth: "50px"
+                                }}
+                            />
+                        </CSSTransition>
+                    </Col>
+                </>
+            }
         </Row>
     )
 }

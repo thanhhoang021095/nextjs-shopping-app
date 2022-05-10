@@ -11,7 +11,6 @@
     .detail-container {
         @include layout.layout-padding;
         width: 100%;
-        padding-top: 20px;
 
         &__media {
             height: 100%;
@@ -105,15 +104,30 @@
         }
 
         &__tab-content {
-            padding: 40px 40px 10px;
             text-align: start;
             width: 100%;
+            padding: 40px 40px 10px;
+            @include responsive.mobile {
+                padding: 0;
+            }
+            @include responsive.tablet {
+                padding: 0;
+            }
         }
 
         &__related-products {
             &--title {
                 text-align: start;
                 margin-bottom: 33px;
+
+                @include responsive.mobile {
+                    font-size: 25px;
+                    text-align: center;
+                }
+                @include responsive.tablet {
+                    font-size: 25px;
+                    text-align: center;
+                }
             }
         }
     }
@@ -135,6 +149,7 @@
 
 .multi-carousel-item {
     height: 100%;
+   
     @include responsive.multipleMedia(true, desktop) {
         padding: 0 20px;
         width: 385.5px;

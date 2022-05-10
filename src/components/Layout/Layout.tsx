@@ -4,20 +4,15 @@ import { Footer } from 'src/components/Footer'
 import styles from './Layout.module.scss'
 import storageActions from "controllers/redux/actions/storageActions"
 import { connect } from 'react-redux';
-import IUser from 'src/interfaces/user'
 import { NavHeader } from 'src/components/Header/NavHeader'
 import { useMediaQuery } from 'react-responsive'
-import { ISubCategory, ICategory } from 'src/interfaces/collection'
 import { Toast } from "src/components/ui-kits/Toast"
+import { SearchInput } from 'src/components/Header/SearchInput'
 
 interface LayoutProps {
   children: React.ReactNode;
   customStyle?: string;
   isHomeRoute?: boolean;
-  cart: any;
-  userInfo: IUser;
-  category: ICategory[];
-  subCategory: ISubCategory[];
   getCategory: () => void;
   getSubCategory: () => void;
 }
@@ -26,15 +21,9 @@ const Layout: React.FC<LayoutProps> = ({
   children,
   getCategory = () => { },
   getSubCategory = () => { },
-  category = [],
-  subCategory = [],
-  customStyle = "",
   isHomeRoute = false,
-  cart = [],
-  userInfo = null
 }): JSX.Element => {
   const [mounted, setMounted] = useState(false);
-  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 991px)' })
   const isLargeDevice = useMediaQuery({ query: '(min-width: 768px)' });
 
   useEffect(() => {
@@ -46,26 +35,34 @@ const Layout: React.FC<LayoutProps> = ({
   return (
     mounted &&
     <>
-      {/* {category.length && subCategory.length && */}
+      {!isLargeDevice ?
+        <NavHeader />
+        :
         <>
-          {!isTabletOrMobile ?
-            <Header />
-            :
-            <NavHeader />
-          }
+          <Header />
+          <div className={styles["header-tape"]}></div>
         </>
-      {/* } */}
-      {isLargeDevice && <div className={styles["header-tape"]}></div>}
+      }
       <div className={styles['layout-container']}>
+        {!isLargeDevice &&
+          <SearchInput
+            style={{
+              position: "relative",
+              margin: "2rem 0",
+              with: "100%",
+              zIndex: 999,
+              paddingLeft: "2rem",
+              paddingRight: "2rem",
+            }}
+          />
+        }
         {children}
       </div>
       <Footer />
-
       <Toast />
     </>
   )
 }
-
 
 const mapStateToProps = (state) => ({
   cart: state.storage.cart,
@@ -79,4 +76,4 @@ const mapDispatchToProps = {
   getSubCategory: storageActions.getSubCategory,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Layout)
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);
