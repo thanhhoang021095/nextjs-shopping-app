@@ -91,19 +91,16 @@ export default class StorageReduxAction {
     return (dispatch) => {
       onToastTimer && clearTimeout(onToastTimer);
       offToastTimer && clearTimeout(offToastTimer);
-
-      onToastTimer = setTimeout(() => {
-        dispatch(cbAction({
-          message,
-          type
-        }));
-        clearTimeout(onToastTimer)
-      }, 500);  
-
+      
+      dispatch(cbAction({
+        message,
+        type
+      }));
+       
       offToastTimer = setTimeout(() => {
         dispatch(StorageReduxAction.removeToast())
         clearTimeout(offToastTimer)
-      }, 3000);  
+      }, 2000);  
     }
   }
 

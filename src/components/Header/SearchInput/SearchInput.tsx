@@ -5,6 +5,7 @@ import { SearchOutlined } from '@ant-design/icons'
 import classNames from 'classnames'
 import api from 'controllers/baseApi'
 import SearchItemResult from "./SearchItemResult"
+import { useMediaQuery } from 'react-responsive'
 
 interface SearchProps {
     style?: Record<string, any>;
@@ -18,7 +19,8 @@ const SearchInput: React.FC<SearchProps> = ({
     const [searchText, setSearchText] = useState("");
     const [searchHistory, setSearchHistory] = useState([]);
     const [searchList, setSearchList] = useState([]);
-    const [focused, setFocused] = React.useState(false)
+    const [focused, setFocused] = React.useState(false);
+    const isSmallDevice = useMediaQuery({ query: '(max-width: 991px)' })
 
     const inputElm = useRef(null);
     const searchContainerElm = useRef(null);
@@ -80,12 +82,12 @@ const SearchInput: React.FC<SearchProps> = ({
                 className={styles["search-section"]}
             >
                 <Row justify="space-between" align='middle'>
-                    <Col 
+                    <Col
                         xxl={20}
                         xl={20}
                         lg={16}
                         md={18}
-                        sm={20} 
+                        sm={20}
                         xs={16}
                     >
                         <Input
@@ -106,14 +108,18 @@ const SearchInput: React.FC<SearchProps> = ({
                             onBlur={onBlur}
                         />
                     </Col>
-                    <Col 
+                    <Col
                         xxl={4}
                         xl={4}
                         lg={8}
                         md={6}
-                        sm={4} 
+                        sm={4}
                         xs={8}
-                        className={styles["search-section__right-col"]}>
+                        className={classNames(
+                            styles["search-section__col"],
+                            { [styles["search-section__right-col"]]: isSmallDevice }
+                        )}
+                    >
                         <Button
                             type="primary"
                             size="large"
@@ -134,7 +140,7 @@ const SearchInput: React.FC<SearchProps> = ({
                             xl={20}
                             lg={16}
                             md={18}
-                            sm={20} 
+                            sm={20}
                             xs={16}
                         >
                             <div

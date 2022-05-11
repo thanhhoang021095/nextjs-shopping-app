@@ -30,20 +30,22 @@
     @include layout.flex-center;
     @include layout.flex-column;
     width: 400px;
-    @include responsive.mobile {
-        width: 200px;
-    }
-
-    @include responsive.multipleMedia(true, mobile) {
-        width: 300px;
-    }
-
-    padding: 30px;
+    padding: 30px 20px;
     background: rgba(255,255,255,.8);
     box-sizing: border-box;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
     border-radius: 10px;
     z-index: 2;
+
+    @include responsive.mobile {
+        width: 250px;
+        padding: 20px 12px;
+    }
+    @include responsive.tablet {
+        width: 300px;
+        padding: 20px 12px;
+    }
+
 
     &__title {
         margin: 0;
@@ -179,6 +181,12 @@
     position: absolute;
     top: 20px;
     left: 20px;
+    @include responsive.mobile {
+        left: 10px;
+    }
+    @include responsive.tablet {
+        left: 10px;
+    }
 }
 
 .register-link {

@@ -9,8 +9,7 @@ import { saveDataLocal } from 'controllers/redux/lib/reducerConfig';
 import { Toast } from 'src/components/ui-kits/Toast'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Button } from 'src/components/ui-kits/Button'
-import { Icon } from 'src/components/ui-kits/Icon'
+import { ReturnAuthenBtnGroupProps } from "src/components/ReturnAuthenBtnGroup"
 
 const TestLogin = ({
   showToast,
@@ -20,6 +19,10 @@ const TestLogin = ({
   const router = useRouter();
   const [account, setAccount] = useState('');
   const [pass, setPass] = useState('');
+  const [hoverBackBtn, setHoverBackBtn] = useState({
+    home: false,
+    return: false
+  });
 
   const validateLogin = (): boolean => {
     if (!account.length || !pass.length) {
@@ -29,56 +32,49 @@ const TestLogin = ({
     return true;
   }
 
-  const getCartInfoFromDB = (id: number) => {
-    const token = JSON.parse(localStorage.getItem("access_token"));
-    if (token) {
-      api.get(`${endpoint['cart']}/${id}`, token)
-        .then((res: any) => {
-          if (res) {
-            getCart(res.cart);
-          }
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      if (validateLogin()) {
+        const loginData = await api.post(`${endpoint['login']}`, {
+          account,
+          password: pass,
         })
-    }
-  }
 
-  const handleLogin = () => {
-    if (validateLogin()) {
-      api.post(`${endpoint['login']}`, {
-        account,
-        password: pass,
-      })
-      .then((res) => {
-        if (res) {
-          api.get(`${endpoint["user"]}/${res.id}`)
-          .then((res) => {
-            getUserInfo(res);
-          })
-          .catch((err) => {
-            throw Error(err);
+        if (loginData) {
+          const {
+            account,
+            address,
+            fullName,
+            id,
+            isActive,
+            phone
+          } = loginData;
+          getUserInfo({
+            account,
+            address,
+            fullName,
+            id,
+            isActive,
+            phone
           });
+          loginData.accessToken && saveDataLocal("access_token", loginData.accessToken);
+          loginData.refreshToken && saveDataLocal("refresh_token", loginData.refreshToken);
 
-          api.get(`${endpoint["cart"]}/${res.id}`).then((res) => {
-            getCart(res.cart)
-          })
-          .catch((err) => {
-            throw Error(err);
-          });
-
-          // save Token
-          res.accessToken && saveDataLocal("access_token", res.accessToken);
-          res.refreshToken && saveDataLocal("refresh_token", res.refreshToken);
-          
-          // back to page
-          showToast('Login Success', "success");
-          
-          setTimeout(() => {
-            // getCartInfoFromDB(res.id);
-            router.back();
-          }, 1500);
+          const cartData = await api.get(`${endpoint["cart"]}/${loginData.id}`);
+          if (cartData) {
+            getCart(cartData.cart);
+            showToast('Login Success', "success");
+            setTimeout(() => {
+              router.back();
+            }, 1500);
+          }
         } else {
           showToast('Login Fail. Please check your info again', "error")
         }
-      })
+      }
+    } catch (error) {
+      console.error(error)
     }
   }
   return (
@@ -132,22 +128,7 @@ const TestLogin = ({
 
       {/* Back Home */}
       <div className={styles['back-home']}>
-        <Button
-          handleClick={() => router.back()}
-          style={{ color: "#fff", background: "transparent" }}
-        >
-          <Icon
-            img="/images/icons/back.png"
-            width="14px"
-            height="14px"
-            iconStyle={`
-                filter : invert(98%) sepia(77%) saturate(344%) hue-rotate(295deg) brightness(118%) contrast(101%);
-                margin-right: 3px;
-                margin-bottom: 2px;
-            `}
-          />
-          Return
-        </Button>
+        <ReturnAuthenBtnGroupProps />
       </div>
     </div>
   )

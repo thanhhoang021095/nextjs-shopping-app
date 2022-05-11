@@ -1,0 +1,25 @@
+@use "../../styles/color.scss";
+@use "../../styles/responsive.scss";
+
+.auth-btn-content {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 0.5rem 0.7rem;
+
+    &__text {
+        margin-bottom: 0;
+        margin-left: 1rem;
+        font-size: 1rem;
+        @include responsive.mobile {
+            display: none;
+        }
+        @include responsive.tablet {
+            display: none;
+        }
+    }
+}
+
+.hover-auth-btn-content {
+    color: color.$primary-color;
+}

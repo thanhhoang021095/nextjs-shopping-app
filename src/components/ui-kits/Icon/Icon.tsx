@@ -1,21 +1,27 @@
 import React from "react";
-import { StyledIcon } from "./Icon.styled";
 
 interface IconProps {
-    img: string;
-    width?: string;
-    height?: string;
-    iconStyle?: string;
+    width: string;
+    height: string;
+    style?: Record<string, any>;
+    source: any;
 }
 
-const Icon:React.FC<IconProps> = ({ 
-    img = "", 
-    width = "100%", 
-    height = "100%", 
-    iconStyle = "", 
-}):JSX.Element => {
+const Icon: React.FC<IconProps> = ({
+    width = "100%",
+    height = "100%",
+    source,
+    style = {}
+}): JSX.Element => {
     return (
-        <StyledIcon src={img} width={width} height={height} customStyle={iconStyle} />
+        <img
+            src={source}
+            style={{
+                width,
+                height,
+                ...style
+            }}
+        />
     )
 }
 
